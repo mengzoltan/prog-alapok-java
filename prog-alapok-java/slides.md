@@ -1473,3 +1473,1648 @@ Tóth Kálmán (10073217-12000098-67341590): 103400 Ft
 Készíts egy `Bank` osztályt, amely `main()` metódusában létrehozol egy bankszámlát!
 Próbáld ki az összes elkészített metódust, hogy jól működik-e!
 A szükséges adatokat a felhasználótól kérd be!
+
+# Kódolási konvenciók
+
+## Elmélet
+
+A **kódolási konvenciók** arra valók, hogy az együtt dolgozó fejlesztők
+hasonló formátumú kódot írjanak. Így ha el kell olvasni, netán módosítani kell
+egymás kódját, könnyebben megértsék azokat.
+
+## Kódformázás
+
+A Java szabványban nincs egységes kódolási szabálygyűjtemény az elnevezésekre, behúzásokra,
+sortörésekre stb. Az Oracle weboldalán megtalálható egy ajánlás, valamint a
+nagyobb cégek is, mint például a Google, mind rendelkeznek saját konvenciókkal.
+Ezeket az alábbi linkeken tanulmányozhatod át:
+
+[https://www.oracle.com/java/technologies/javase/codeconventions-contents.html](https://www.oracle.com/java/technologies/javase/codeconventions-contents.html)
+
+[https://google.github.io/styleguide/javaguide.html](https://google.github.io/styleguide/javaguide.html)
+
+Az IDE-k tartalmaznak kódformázó menüpontokat, de ezek sem egységesek.
+
+## Behúzások, üres sorok, blokkok
+
+Konvenció szerint beljebb kezdünk minden olyan utasítást, amely valamilyen másik
+utasításon, blokkon belül van. Így az osztályon belül beljebb kezdjük az
+attribútum és metódus deklarációkat, a metóduson belül a metódustörzs utasításait.
+
+Az attribútumok és a metódusok között hagyjunk ki egy-egy üres sort, így a kódunk
+sokkal strukturáltabbá, olvashatóbbá válik.
+
+## Elnevezések
+
+A Java nyelvben használt azonosítók bármilyen Unicode betűt, számot `_`-t és `$`-t
+tartalmazhatnak, azonban kerüljük az ékezetes karakterek használatát. Legjobb,
+ha csak az angol ábécé betűit és számokat használunk.
+Bármilyen elnevezés megengedett, kivéve a nyelv által lefoglalt kulcsszavakat
+(például a ciklusképző  utasításoknál a `while`, `do`, `for` szavak,
+elágazásképező utasításoknál az `if`). Kerüljük azokat az elnevezéseket is,
+amelyek megtévesztők. Például ne használjuk a `string` vagy az `integer` azonosítót,
+mert ezeket ugyan elfogadja a fordító, de összekeverhetőek a `String` és `Integer`
+típusokkal. Nem megengedettek a számmal és a speciális karakterrel kezdődő
+elnevezések. (Ez utóbbiból vannak ugyan kivételek, de ezek semmiképpen nem ajánlottak.)
+Ha több szóból álló elnevezést szeretnénk megadni, azt egybeírjuk, de egymástól
+úgy választjuk el, hogy a szóhatároknál a betűt nagybetűvel írjuk, az összes többi
+betűt pedig kisbetűvel (**CamelCase**).
+Az osztályok nevét nagy kezdőbetűvel kezdjük, ugyanez igaz a konstruktorok nevére
+(a konstruktorok elnevezése megegyezik az osztály nevével). Az attribútumok, a metódusok
+és bármilyen egyéb változó nevét kisbetűvel kezdjük.
+Kivétel ezek alól a mozaikszavak elnevezése, ezek esetén csak az első betűt írjuk naggyal,
+a többit kicsivel.
+
+## Megjegyzések
+
+Háromféle megjegyzés létezik. Az egysoros megjegyzést `//` karakterekkel kezdjük
+és a sor végéig tart. Ezt akár egy utasítás mögé is írhatjuk.
+Ha többsoros megjegyzést szeretnénk írni, akkor azt a `/*`
+jellel kezdjük és  `*/` jellel zárjuk. A Javadoc megjegyzések olyan speciális elemek,
+amelyekből HTML-ben írt dokumentáció készíthető. Ezeket `/**` jellel kezdjük és `*/`
+jellel fejezzük be, és konvenció szerint minden sor elején `*` jel van. A Javadoc
+megjegyzés mindig azon elem fölé kerül, amelyikhez készítjük. Tartozhat osztályhoz,
+attribútumhoz és metódushoz is. Speciális jelöléseket használ például a metódus
+paraméterek vagy a visszatérési érték megadásához.
+
+```java
+/**
+ * Visszaadja összefűzve az oktató nevét és születési évét.
+ *
+ * @return Az összefűzött eredmény.
+ */
+public String getNameAndYearOfBirth() {
+    return name + ": " + yearOfBirth; // Összefűzés
+}
+```
+
+Ne használjunk feleslegesen megjegyzéseket. Amennyiben a kódból is egyszerűen megfejthető,
+hogy mit csinál, nem kell odaírni megjegyzésben is.
+
+Forrás: [https://www.oracle.com/technical-resources/articles/java/javadoc-tool.html](https://www.oracle.com/technical-resources/articles/java/javadoc-tool.html)
+
+## Sorrendezés
+
+A java fájlban először mindig a csomagdeklaráció (package), utána az importok,
+végül az osztálydeklaráció következik. Ezek sorrendje kötött. Az, hogy az
+osztályon belül milyen sorrendben deklaráljuk az attribútumokat, metódusokat
+és konstruktorokat, az ránk van bízva, mégis konvencionálisan először adjuk meg
+az attribútumokat, utána a konstruktorokat, és csak a legvégén a metódusokat.
+Ez utóbbiakat láthatóság szerint csökkenő sorrendbe szoktuk rendezni, azaz
+először írjuk a publikus, a legvégén pedig a privát metódusokat.
+
+## Ellenőrző kérdések
+
+* Mire valók a kódolási konvenciók?
+* Hogyan nevezzük el az osztályokat, attribútumokat és metódusokat?
+* Mire figyeljünk a betűszavaknál?
+* Milyen sorrendben következzenek egy osztályon belül a különböző tagok?
+* Milyen típusú megjegyzések vannak Java nyelvben?
+
+## Gyakorlati feladatok
+
+A `conventions` csomagba dolgozz!
+
+### Gyakorlati feladat - Javítsd a helytelent!
+
+Az alábbi kód nem helytelen ugyan, de a kódolási konvencióknak több helyen nem felel meg.
+Hozz létre egy `Car` osztályt, másold bele az alábbi kódot és javítsd ki benne a konvencióknak nem megfelelő
+dolgokat (elnevezések, sortörések, behúzások, stb.)!
+Ne az IDEA beépített formázójával formázd meg! Végül írj hozzá egy `CarMain` nevű osztályt, amelyben teszteled,
+hogy tényleg minden jól működik-e!
+
+```java
+package conventions;
+
+public class Car {
+
+    public void setCarType(String carType) {this.CarType = carType;}
+
+    private String CarType; private String engineType;
+    private int doors;
+public int getPersons() {
+        return persons;
+    }
+    public Car(String carType, String engineType, int DOORs, int persons) 
+    
+    
+    
+    { 
+    this.CarType = carType;
+    this.engineType = engineType;
+        this.doors = DOORs;
+        this.persons = persons;
+    }
+    private int persons;
+    public String getCarType() {
+                                    return CarType;
+    }public String GetEngineType() {
+        return engineType; }public int getdoors() {
+        return doors;
+    }
+
+    
+
+    
+
+                    public void setEngineType(String engineType) {
+        this.engineType = engineType;}
+
+    public void SetDoors(int doors) {
+        this.doors = doors;}public void SetPersonS(int persons) {
+        this.persons = persons;}
+        public void addModelName(String MODELName) {
+        this.CarType = CarType + " " + MODELName;
+    }
+}
+```
+
+# Literálok és lokális változók
+
+## Elmélet
+
+## Adattípusok
+
+A Java erősen típusos nyelv, azaz minden változó deklarációjakor meg kell adnunk
+annak típusát, és ezt később nem változtathatjuk meg. Egy típus
+pl. a `boolean` mely egy **logikai értéket** tárol, `true` vagy `false`.
+Az `int` **egész típus**, a `double` **lebegőpontos típus** (a valós számok tárolási módja,
+lényeg, hogy ezzel lehet nem csak egész számokat ábrázolni). Ezek **primitív típusok**,
+úgy is megkülönböztethetőek, hogy kisbetűvel kezdődnek.
+
+Egy változó lehet primitív típusú vagy **referencia típusú**.
+A primitív típusú változók magát az értéket tárolják.
+A referencia típusú változók
+mindig egy objektumra mutatnak, de annak nem az állapotát, hanem csak egy
+hivatkozást (referencia) tárolnak. Egy objektum állapota csak közvetve, ezen a hivatkozáson,
+vagy referencián keresztül érhető el. Ilyen referencia típus például a `String`.
+
+## Bevezetés a literálok használatába
+
+**Literálnak** hívjuk azokat a kifejezéseket, amelyeknek önmagukban is van jelentése.
+Ezekhez mindig **implicit** módon társul egy adattípus.
+
+Az implicit ebben az esetben azt jelenti, hogy nem nekünk kell megadni, hanem a "háttérben",
+közvetetten történik meg. (A fordító vagy a virtuális gép végzi el helyettünk.)
+
+A `true` és `false`
+`boolean` típusú literál. Ha pl. leírjuk, hogy `12`, az egy
+egész literál, melynek típusa `int`.
+
+Amennyiben nagy egész számot használunk, az olvashatóság kedvéért írhatjuk a következő
+formátumban is: `100_000`.
+
+Pl. az `1.5` egy lebegőpontos literál, melynek
+típusa `double`.
+
+Speciális literál a `null`, mely referencia változóknak adható értékül, amikor
+semmilyen objektumra nem mutatnak.
+
+A `"John Doe"` egy `String` típusú literál.
+
+## Lokális változók
+
+A metóduson belül deklarált és paraméterként átadott változókat együttesen **lokális
+változóknak** nevezzük.
+Változókat deklarálni a típusukkal és a nevükkel lehet.
+Ezen kívül opcionálisan meg lehet adni kezdőértéket is, egyenlőségjel után.
+
+```java
+double amount;
+amount = 2.3;
+
+double sum = 1.5;
+
+int i = 0;
+```
+
+Látható, hogy a deklaráció és az értékadás állhat külön, két utasításban, de
+állhat egyben is, egy utasításként.
+
+A lokális változót a deklarálástól kezdve az adott blokk végéig lehet használni, ez a **láthatósága**.
+
+A változónak bármennyiszer újra értéket tudunk adni.
+
+A lokális változóknak nincs automatikus kezdőértékük, ezért használatuk előtt mindig nekünk
+kell az értékadásról gondoskodni. Kizárólag a deklarációtól azon blokk végéig
+léteznek, amelyben deklaráltuk.
+
+## Típuskonverzió
+
+Alapszabály, hogy egy változónak csak olyan típusú érték adható, amilyen a
+deklarált típusa. Ha más típusú értéket szeretnénk benne tárolni, akkor azt
+konvertálni kell. Ez a **típuskonverzió** vagy típuskényszerítés.
+Ez a konverzió történhet automatikusan, implicit módon vagy
+a programozó által jelölten, explicit módon.
+
+Hasonló típusok között (pl. számok) a kisebb automatikusan konvertálható
+nagyobbra, mint például `int` típusú érték `double` típusúra. A nagyobb típusú
+csak explicit, azaz kiírt konverzióval (**cast**) konvertálható kisebbre, és ez esetleges
+adatvesztéssel járhat.
+
+```java
+double d = 12;         // int --> double implicit
+int i = (int) 3.14; // double --> int kényszerítéssel, értéke 3
+```
+
+Például a matematikai kerekítés szerint `3.6` kerekített értéke `4` lenne, de Java típuskényszerítés
+esetén `3` lesz.
+
+```java
+double d = 3.6;
+int i = (int) d; // i értéke 3 lesz
+```
+
+A Java nyelvben a logikai érték nem kapcsolható számértékhez, mint sok más nyelvben,
+ezért ezek nem konvertálhatók számmá.
+
+## Objektumok élettartama
+
+Egy objektum a létrehozásától (konstruktor hívása) addig létezik, amíg használjuk.
+Nem kell nekünk megjelölnünk, hogy nem használjuk többet, hanem ezt a JVM automatikusan
+figyeli. Van egy mechanizmus, mely a memóriából kitörli a nem használt objektumokat,
+ezáltal helyet szabadítva fel, ez a **szemétgyűjtő mechanizmus**, **garbage collector** (**GC**).
+
+## Getter boolean esetén
+
+Egy boolean típusú változó esetén a hozzá generált getter nem `get`, hanem `is` előtagot tartalmaz.
+
+```java
+public class Employee {
+    private boolean fullTime;
+
+    public boolean isFullTime() {
+        return fullTime;    
+    }
+}
+```
+
+## Ellenőrző kérdések
+
+* Mire valók a literálok?
+* Milyen literálokat ismersz és hogyan deklarálod őket?
+* A hol definiált változókat nevezzük lokális változóknak?
+* Szükséges-e típust definiálni? Milyen típusokat különböztetünk meg?
+* Mi a lokális változó láthatósága?
+* Mi a kezdőértéke egy lokális változónak?
+* Mi az a szemétgyűjtő mechanizmus?
+
+## Gyakorlati feladatok
+
+A `localvariables` csomagba dolgozz!
+
+A feladatok megoldásai a `solutions/localvariables` elérési úton vannak.
+
+### Gyakorlati feladat - Literálok és típusok
+
+A `localvariables.LocalVariablesMain` osztály `main()` metódusában
+hozd létre az alábbi lokális változókat!
+
+Definiálj egy `boolean` típusú
+változót `b` néven, majd írasd ki az értékét!
+
+Sikerül?
+
+Adj értékül neki `false` értéket és írasd ki így!
+
+Definiálj egy `int` típusú változót `2` kezdőértékkel `a` néven! Írd ki!
+
+Definiálj két `int` típusú változót `i` és `j` néven `3` és `4`
+kezdőértékkel!
+
+Definiálj egy `int` típusú változót `k` néven, és add neki értékül az
+`i` változó értékét!
+
+Írd ki a konzolra `i`, `j` és `k` értékét!
+
+Próbálj egy változót definiálása előtt kiírni! Sikerül?
+
+Definiálj egy `String` típusú változót `s` néven! Adj neki `"Hello World"`
+értéket! Írd ki!
+
+Definiálj egy `String` típusú változót `t` néven, és add értékül neki az `s`
+változó értékét! Ezt is írd ki!
+
+Metóduson belül definiálj egy blokkot (kapcsos zárójelek között)!
+A blokkon belül definiálj egy `int` típusú `x` változót `0` kezdőértékkel!
+Írd ki az értékét! Írd ki a blokkon belül a korábban definiált `a` változó értékét is!
+
+Az értékét próbáld kiírni blokk után, a blokkon kívül! Fog sikerülni?
+
+A blokkban próbáld meg kiírni a blokkon kívül, a blokk előtt definiált `a`
+változó értékét!
+
+### Gyakorlati feladat - Távolság
+
+Hozz létre egy `Distance` osztályt, mely tartalmazza a távolságot lebegőpontos számként,
+valamint azt, hogy a mért távolság pontos-e, egy boolean értékként!
+Csak getter metódusokat hozz létre!
+
+A `DistanceMain` osztályban hozz létre egy `Distance` példányt, majd írd ki
+a távolságot, és hogy pontos-e!
+
+Majd deklarálj egy `int` típusú változót és add értékül neki a távolság
+egész részét! Majd írd ki ezt az értéket!
+
+![Distance](images/distance.png)
+
+# Kifejezések és utasítások
+
+## Elmélet
+
+A **kifejezés operátorok** (műveleti jelek) és **operandusok** (azok a literálok,
+változók vagy metódushívások, amelyekkel a műveletet elvégezzük) kombinációja,
+tipikusan egy érték kiszámítására.
+
+## Operátorok
+
+- Matematikai operátorok: `+`, `-`, `*`, `/`, `%` (összeadás, kivonás, szorzás, osztás, maradékos osztás)
+- Példányosítás: `new`
+- Értékadó operátor: `=`
+- Összevont értékadó operátorok: `+=`, `-=`, `*=`, `/=`, `%=`, `&=`, `|=`, `^=`
+- Összehasonlítás, egyenlőségvizsgálat: `<`, `<=`, `>`, `>=`, `==`, `!=`
+- Logikai operátorok: `!`, `&`, `|`, `&&`, `||`
+- Léptető operátorok (prefix és postfix): `++`, `--`
+- Háromoperandusú operátor: `?:`
+
+Az összevont értékadó operátor működése:
+
+```java
+int i = 5;
+i += 6; // i értéke 11, az i = i + 6 kifejezésnek felel meg
+```
+
+Az összehasonlító operátorok eredménye egy boolean érték:
+
+```java
+boolean eq = 5 == 10; // false érték, mert a két literál nem egyenlő
+
+boolean gt = 10 > 5; // true érték 
+```
+
+Összetett kifejezés esetén a műveletek elvégzésének sorrendje kötött, de
+megfelelő zárójelezéssel módosítható. Ehhez kerek zárójelet használunk.
+
+```java
+int i = 2 + 3 * 5; // 17, mert a szorzást előbb hajtja végre
+
+int j = (2 + 3) * 5; // 25, mert a zárójelek miatt az összeadást előbb hajtja végre
+```
+
+**VIGYÁZZ!** Ne keverd össze az értékadó `=` és az egyenlőséget vizsgáló `==` operátorokat!
+
+Egy kifejezés operandusa lehet literál, egy változó és egy metódushívás is.
+
+```java
+String name = trainer.getName(); // Értékadó operátor jobb oldalán egy metódushívás
+```
+
+Egy kifejezést át lehet adni paraméterként is.
+
+```java
+System.out.println(4 + 5);
+```
+
+## Utasítások
+
+A Java nyelvben az **utasítások**:
+
+- változó deklaráció
+
+```java
+int age;
+```
+
+- értékadás
+
+```java
+age = 10;
+```
+
+- példányosítás
+
+```java
+new Random();
+```
+
+- metódushívás
+
+```java
+System.out.println("Hello World");
+```
+
+A Java nyelvben minden utasítást pontosvesszővel kell lezárnunk.
+
+## Szövegek összehasonlítása
+
+A szövegek nem hasonlíthatóak össze a `==` operátorral, hanem az `equals()` metódust kell hívni.
+Ennek használata a következő:
+
+```java
+String name = "John";
+
+System.out.println(name.equals("John")); // 1
+
+System.out.println("Jack".equals(name)); // 2 
+```
+
+Az `2` jelű sorban lévő formátumot szoktuk használni, mert ez akkor is működik, ha
+a `name` értéke `null`. Az `1` jelű esetben hibaüzenetet kapunk, ha a  `name` értéke `null`.
+
+## Ellenőrző kérdések
+
+* Mire valók a kifejezések?
+* Írj fel néhány kifejezést!
+* Milyen operátorokat ismersz?
+* Java nyelven milyen utasításokat ismersz?
+
+## Gyakorlati feladatok
+
+A `statements` csomagba dolgozz!
+
+A feladatok megoldásai a `solutions/statements` elérési úton vannak.
+
+### Gyakorlati feladat - Kifejezések
+
+A `statements.StatementMain` osztály `main()` metódusában definiálj egy `int` típusú `x` változót,
+melynek értéke az `5` és `6` literál összege.
+
+Definiálj egy `int` típusú `y` változót, mely a `11` literálból kivont `x` változó értékét kapja.
+
+Definiálj egy `int` típusú `z` változót, mely értéke `8`.
+
+Definiálj egy `boolean` típusú `b` változót, mely értéke `true`, ha az `x` értéke
+nagyobb, mint az `y` változó értéke.
+
+Definiálj egy `boolean` típusú `c` változót, mely értéke `true`, ha a `b` értéke
+`true`, vagy `z` értéke nagyobb, mint `5`.
+
+A `z` értékéhez adj hozzá egyet egy operandusú operátorral.
+
+Ellenőrzésként írasd is ki minden változó értékét a konzolra!
+
+### Gyakorlati feladat - Időpontok
+
+Készíts egy `Time` osztályt, amely egy adott időpontot reprezentál egy napon
+belül. Három attribútuma az óra, perc és másodperc értékét tárolja egész számként. Ezeket a  
+a konstruktorban kapja meg. Készítsd el az alábbi metódusokat:
+
+* A `getInMinutes()` metódus az időpont értékét percekben adja vissza, de a
+  másodperceket figyelmen kívül hagyja.
+* A `getInSeconds()` metódus a teljes időpontot másodpercben adja vissza.
+* Az `earlierThan()` metódus paraméterként egy másik `Time` típusú objektumot kap. Amennyiben az adott
+  objektum által reprezentált időpont korábbi, mint a paraméterül kapott, igazat ad vissza, különben hamisat.
+  Használd a már elkészített metódusokat!
+* A `toString()` metódusa az időpontot óra\:perc\:másodperc formában szövegként adja vissza.
+
+A `TimeMain` osztály `main()` metódusában teszteld az osztályt! Kérj be a felhasználótól két
+időpontot, és írd ki az elsőt teljesen majd percekben, a másodikat teljesen majd
+másodpercekben, illetve azt, hogy az első korábbi-e, mint a második!
+
+Egy lehetséges kimenet:
+
+```
+Az első időpont 12:3:43 = 723 perc
+A második időpont 4:21:38 = 15698 másodperc
+Az első korábbi, mint a második: false
+```
+
+### Gyakorlati feladat - Osztható 3-mal
+
+Írj egy `main()` metódust a `DivByThree`, osztályba, mely bekér egy
+egész számot a felhasználótól, majd kiírja, hogy 3-mal osztható-e!
+
+### Gyakorlati feladat - Befektetések
+
+Egy befektetéskezelő cég legfeljebb egy év időtartamra vesz át összeget befektetésre
+az ügyfeleitől. Ezután bármikor meg lehet szüntetni a befektetést, és a tőkét az
+adott napig járó kamattal együtt ki lehet venni. Megszüntetéskor a befektető cég
+kezelési költséget von le. Menet közben megszüntetés
+nélkül is le lehet kérdezni, hogy mennyi kamat járna az adott napig.
+
+![Investment UML](images/investment_class.png)
+
+Hozd létre az `Investment` osztályt az alábbi UML-diagram alapján! A konstruktor paraméterként csak a `fund` (tőke)
+és az `interestRate` (kamatláb) értékét kapja meg! Befektetés létrehozásakor (példányosításkor)
+az `active` attribútum értéke legyen mindig igaz! A `getYield()` metódusa megkapja, hogy hány
+napra kérik le a hozamot, és visszaadja az adott időszakra kiszámított hozam
+összegét. A `close()` metódusa úgy zárja le a befektetést, hogy közben kezelési költségként levonja a kivett összeg 0,3%-át,
+végül visszaadja a teljes kifizetett összeget. A lezárást az `active` attribútum hamisra
+állításával éri el. A kifizetett összeg tartalmazza a tőkét és a kamatokat, csökkentve
+a kezelési költséggel. Amennyiben már lezárt befektetésre hívják meg a `close()`
+metódust, a kifizetett összeg 0 legyen!  
+(Használd a három operandusú operátort a kifizetett összeg kiszámításához!)
+
+A metódusok implementálása során törekedj arra, hogy ne írd le kétszer ugyanazt
+a képletet, hanem használd a már elkészített metódusokat!
+
+Próbáld ki a működését az `InvestmentMain` osztály `main()` metódusában! Kérd be
+a befektetett összeget és a kamatlábat a felhasználótól, majd írd ki a befektetés
+adatait! Próbáld meg kétszer is lezárni a befektetést! Például:
+
+```
+Befektetés összege:
+100000
+Kamatláb:
+8
+Tőke: 100000
+Hozam 50 napra: 1095.890410958904
+Kivett összeg 80 nap után: 101448.16438356164
+Kivett összeg 90 nap után: 0.0
+```
+
+# Csomagok
+
+## Elmélet
+
+## Csomagok célja
+
+A Java nyelv alapegysége az **osztály**. Általában egy osztály egy fájlnak felel meg,
+de ez alól vannak kivételek. Ha nagyon sok fájlunk van, vagy vannak azonos nevűek,
+akkor azokat különböző könyvtárakba szervezzük azért, hogy könnyebben áttekinthetőek
+legyenek, könnyen megtaláljuk és differenciáljuk azokat. A **csomagok**
+(package) az operációs rendszerben valójában könyvtárak.
+
+Legfontosabb feladatai:
+
+* Struktúrát ad a projektnek: nagyobb projektek több száz, vagy akár több ezer
+  osztályt is tartalmazhatnak. Ezeket pl. alkalmazás rétegek vagy funkciójuk szerint
+  csoportosíthatjuk csomagok használatával.
+* Névütközés feloldása: ha több azonos nevű osztály van, akkor ezeket megkülönböztetjük
+  aszerint, hogy melyik csomagban vannak.
+* Szabályozza a **láthatóságot**: a Java nyelvben az osztályok zártak, ami azt
+  jelenti, hogy megadhatjuk, ki mit lásson belőle. Ha nem szabályozzuk, akkor a
+  tagok alapértelmezett láthatósága csomag szintű (ún. package private), azaz az ugyanazon csomagban
+  lévő más osztályok hozzáférhetnek az osztályunkban lévő tagokhoz.
+
+## Csomagok használata
+
+A `Scanner` osztály a `java.util` csomagban van.
+Hiába deklarálunk egy `Scanner` típusú változót, a fordító nem fogja megtalálni,
+mert nem tudja, hol keresse. Ehhez meg kell mondanunk azt is, hogy melyik csomagban van.
+Ezt többféleképpen is megtehetjük.
+
+Az első, hogy az osztály neve előtt megadjuk a csomagot is ponttal elválasztva:
+`java.util.Scanner`. Persze akárhányszor hivatkozunk a `Scanner` osztályra, mindig
+újra és újra így, teljes **minősített névvel** kell azt tennünk, ami hosszú és
+áttekinthetetlen kódhoz vezetne.
+
+```java
+public class NameReader {
+
+    public static void main(String[] args) {
+        java.util.Scanner scanner = new java.util.Scanner(System.in);
+        System.out.println("What's your name?");
+        String name = scanner.nextLine();
+        System.out.println(name);
+    }
+
+}
+```
+
+A második, hogy **beimportáljuk** az osztályt a fájlunkban közvetlen az osztály
+deklarációja fölé. Így ebben a fájlban bárhol használhatjuk, pusztán
+osztálynévvel hivatkozva rá.
+
+```java
+import java.util.Scanner;
+
+public class NameReader {
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("What's your name?");
+        String name = scanner.nextLine();
+        System.out.println(name);
+    }
+
+}
+```
+
+A harmadik, hogy beimportáljuk az adott csomagban lévő összes osztályt, így a
+`Scanner` osztályt is. Ebben az esetben minden, az importált csomagban lévő
+osztályra hivatkozhatunk kizárólag az osztály nevével. Ha egy csomagban lévő minden osztályt
+be szeretnénk importálni, akkor azt az osztálynév helyére tett `*` karakterrel
+jelölhetjük (**wildcard**).
+
+```java
+import java.util.*;
+
+public class NameReader {
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("What's your name?");
+        String name = scanner.nextLine();
+        System.out.println(name);
+    }
+
+}
+```
+
+Leggyakrabban a második módszert használjuk, a harmadik pedig nem javasolt.
+
+> A Clean Code könyv szerint azonban inkább a wildcard használata javasolt, ugyanis
+ekkor nincs konkrét hivatkozás az osztályra, csak a csomagra, így a függőség
+lazább. Amennyiben sok osztály van, miért is akarnánk a kódot felesleges importokkal terhelni.
+
+Természetesen ha az egyik osztály a saját csomagjában lévő osztályt akarja használni,
+akkor nincs szükség importra.
+
+Van azonban egy csomag, amelynek az osztályait importálás nélkül is elérjük, a
+`java.lang` csomag. Ebben található például a `System` és a `String` osztály is.
+Mi van akkor, ha két ugyanolyan nevű osztályt szeretnénk használni? Az biztos,
+hogy ezek két különböző csomagban vannak, de ha mindkettőt importáljuk, akkor
+vajon melyikre gondolunk a kódban?
+
+```java
+import java.util.Date;
+import java.sql.Date; // HIBA!!!
+
+public class DateCalculator {
+
+public static void main(String[] args) {
+		Date date = new Date(); // Ez most melyik Date?
+		// ...
+	}
+
+}
+```
+
+Ezt a Java fordító nem engedi, jelzi, hogy a kódunk hibás. Két választásunk van:
+
+- az egyiket importáljuk, a másiknál minősített nevet használunk:
+
+```java
+import java.util.Date;
+
+public class DateCalculator {
+
+    public static void main(String[] args) {
+        Date date;
+        java.sql.Date sqlDate;
+        // ...
+    }
+
+}
+```
+
+- mindkettő esetén teljes minősített nevet használunk:
+
+```java
+public class DateCalculator {
+
+	public static void main(String[] args) {
+		java.util.Date date;
+		java.sql.Date sqlDate;
+		// ...
+	}
+
+}
+```
+
+Hogy tudjuk megadni, hogy a mi osztályunk melyik csomagban van? A fájl első sora
+mindig a csomagdeklarációt tartalmazza.
+
+```java
+package business;
+
+public class BusinessLogic {
+    // ...	
+}
+```
+
+Ha ez elmarad, akkor az osztályunk egy ún. **default package**-be kerül, ami a
+projektünk gyökérmappája. Ez nem javasolt, ezért mindig adjunk meg csomagnevet!
+Mivel nagyon sok cég fejleszt Java nyelven, és gyakran előfordul, hogy azonos
+osztályneveket használnak, ezért a javasolt csomagnév tartalmazza a domain nevet
+visszafelé. Például a Training360 domain neve `training360.com`, ezért használható lenne
+a `com.training360` csomagnévként.
+
+![Csomagok](images/packages.png)
+
+A csomagok valójában fizikailag könyvtárak.
+
+A csomagokban újabb csomagokat is létre lehet hozni, így megvalósítva egy fa
+struktúrát. Azonban míg a könyvtárakat Windows esetén backslash (`\`)
+karakterrel választjuk el, Linux esetén perjellel (`/`), Java csomagokat
+pont karakterrel (`.`). Ezért a `java.util` csomag valójában a `java` csomagban
+lévő `util` csomag.
+
+Ha importálunk egy csomagot, akkor csak az abban lévő osztályokat
+látjuk, az alcsomagokban lévő osztályokat nem.
+
+Amennyiben beírjuk az osztály nevét, és az egy másik csomagban van, az IDEA segít nekünk az importban.
+Kattintsunk az osztály nevére, amit nem talál (ezért piros), és amint aláhúzásra kerül,
+nyomjuk meg az `Alt + Enter` billentyűkombinációt.
+
+## Ellenőrző kérdések
+
+* Mire használatosak a Java csomagok?
+* Mi a csomag fizikai fájlrendszerbeli megfelelője?
+* Hogyan hozunk létre új csomagokat?
+* Hogyan használunk más csomagban lévő osztályokat?
+* Hogyan kezeljük a névütközést?
+
+## Gyakorlati feladatok
+
+A `packages` csomagba dolgozz!
+
+A feladatok megoldásai a `solutions/packages` elérési úton vannak.
+
+Mindkét feladatnál figyeld meg, hogyan kell importálni a másik csomagokban található
+osztályokat (az IDEA segít az importban)!
+
+### Gyakorlati feladat - Köszöntés
+
+Hozz létre a `packages.greetings` csomagban egy `Greeter` osztályt, melynek legyen
+egy `public void sayHello()` metódusa, mely kiírja, hogy `Hello World!`.
+
+Hozz létre a `packages.main` csomagban egy `MainProgram` osztályt, melynek
+legyen egy `main()` metódusa. Ez példányosítsa a `Greeter` osztályt, majd hívja meg annak `sayHello()` metódusát!
+
+### Gyakorlati feladat - Teljes név
+
+Hozz létre a `packages.prefix` csomagban egy `Prefix` nevű osztályt, melynek legyen egy
+`private String pre` nevű attribútuma!
+
+Hozz létre a `packages.firstname` csomagban egy `FirstName` nevű osztályt, melynek legyen egy
+`private String first` nevű attribútuma!
+
+Hozz létre a `packages.lastname` csomagban egy `LastName` nevű osztályt, melynek legyen egy
+`private String last` nevű attribútuma!
+
+Mindhárom osztály a konstruktorában állítsa be az attribútum értékét a paraméterül megadottra,
+valamint mindhárom osztályban legyen getter metódus is az attribútumra!
+
+Végül hozz létre a `packages.namemain` csomagban egy `NameMain` nevű osztályt, melynek legyen egy
+`main()` metódusa! Ez példányosítsa mindhárom osztályt, és az attribútumaik értékeiből fűzzön össze
+egy teljes nevet! Ezt írja is ki a konzolra!
+
+# Java API
+
+## Elmélet
+
+Az **API** az angol Application Programming Interface kifejezés rövidítése, amely magyarra fordítva
+"Alkalmazásprogramozási Felületet" jelent. Az API-k a szoftverfejlesztők munkáját hivatottak
+megkönnyíteni azzal, hogy hozzáférést biztosítanak egy adott szoftver vagy eszköz utasításkészletéhez.
+
+![JDK és JRE](images/classlib.png)
+
+> A Java 11 utáni Java verzók már nem tartalmaznak külön JRE-t, csak a JDK-t lehet letölteni.
+
+A Java nyelv nagyon gazdag **osztálykönyvtárral** rendelkezik csomagokba szervezve, melyet verzióról verzióra
+újabbakkal egészítenek ki, így nem kell minden feladatra saját osztályt gyártanunk.
+Legyen az párhuzamosság kezelése, naplózás, dátum- és időkezelés, reguláris kifejezések,
+XML állományok feldolgozása, adatbázis-kezelés, fájlkezelés, felhasználói felületek és még sorolhatnánk, a
+Java alapkönyvtáraiban ezekre mindre találunk megoldást.
+Teljes Java 8 dokumentációt találhatsz a [https://docs.oracle.com/javase/8/docs/api/](https://docs.oracle.com/javase/8/docs/api/)
+oldalon, de minden Java verzióról van fönt hasonló az Oracle oldalán. Keresd meg a legfrissebbhez tartozót!
+Ez egy ún. **JavaDoc** eszközzel kerül kigenerálásra.
+Sőt, ha kíváncsi vagy az osztályok forráskódjára, akkor azt is megtalálod a JDK telepítési könyvtárában
+a `lib\src.zip` állományban.
+
+> Az API dokumentáció jelentősen megváltozott a frissebb verziókban. A 9-es verzióban lett kereshető, és a 11-es
+> verzióban eltűnt a több ablakos nézet.
+
+## Ellenőrző kérdések
+
+* Mi az az osztálykönyvtár?
+* Hogyan van az osztálykönyvtár szervezve?
+* Hogyan kell elemeket felhasználni az osztálykönyvtárból?
+* Milyen esetekben nem kell `import` kulcsszót használni?
+* Hol található az osztálykönyvtár dokumentációja?
+
+## Gyakorlati feladatok
+
+A `javaapi` csomagba dolgozz!
+
+A feladatok megoldásai a `solutions/javaapi` elérési úton vannak.
+
+### Gyakorlati feladat - Navigáció a dokumentációban
+
+Keresd ki a `Scanner` osztályt az API dokumentációban, majd annak a `nextLine()` és
+`nextInt()` metódusát!
+
+### Gyakorlati feladat - String osztály
+
+Keresd ki a JDK API dokumentációból, a
+`String` osztálynál, hogyan lehet egy karakterláncot nagybetűssé tenni!
+
+Írj egy `Upper` osztályt, ami a `Hello World!` szöveget nagybetűssé alakítja!
+
+# JAR állomány
+
+## Elmélet
+
+Egy Java alkalmazás több száz, vagy akár több ezer osztályból is állhat. Az alkalmazás
+terjesztése sokkal könnyebb, ha ezek valahogyan egységbe vannak foglalva.
+A **JAR** állomány tulajdonképpen a lefordított class fájlokat és az alkalmazáshoz
+tartozó egyéb erőforrás állományokat tartalmazza ZIP formátumba
+összecsomagolva, megkönnyítve ezzel a teljes alkalmazás hordozását. JAR állomány
+készítését a Maven is támogatja. A JAR egy betűszó, a "Java Archive" rövidítése.
+
+```
+mvn clean package
+```
+
+A parancs hatására a Maven kitörli az előző fordítás eredményét (`clean`),
+azaz törli a `target` könyvtárat, majd
+újra fordítja az osztályokat és elkészíti a JAR állományt alapértelmezetten a
+`target` könyvtárba. A JAR neve az `artifactId` és a `version` összefűzve.
+Az összecsomagolt osztályok használatához a JVM-nek
+tudnia kell, hogy ezek hol vannak, azaz a JAR állományt hozzá kell adni a classpath-hoz,
+és meg kell adnunk benne a futtatandó osztályt teljes minősített névvel.
+
+```
+java -classpath target\distjar-1.0-SNAPSHOT.jar distjar.HelloWorld
+```
+
+## Futtatható JAR állomány
+
+Amennyiben az összecsomagolt osztályok között van `main()` metódust tartalmazó, akkor
+a JAR állomány önállóan futtatható is lehet. Ehhez szükséges,
+hogy maga a JAR állomány tartalmazzon hivatkozást a `main()` metódust tartalmazó
+osztályra, melyet a `pom.xml` állományban tudunk konfigurálni.
+
+```xml
+<build>
+    <plugins>
+        <plugin>
+            <artifactId>maven-jar-plugin</artifactId>
+            <version>3.2.0</version>
+            <configuration>
+                <archive>
+                    <manifest>
+                        <mainClass>distjar.HelloWorld</mainClass>
+                    </manifest>
+                </archive>
+            </configuration>
+        </plugin>
+    </plugins>
+</build>
+```
+
+> Nem kötelező a `<version>` tag használata, azonban erősen javasolt. Elhagyása esetén
+a Maven WARNING-okat fog kiírni.
+
+A futtatáshoz szükséges információkat JAR állományon belül a `META-INF/MANIFEST.MF` fájl tartalmazza.
+Ebben az esetben az alkalmazás a `-jar` kapcsolóval indítható.
+
+```
+java -jar target\distjar-1.0-SNAPSHOT.jar
+```
+
+Amennyiben a teljes alkalmazás több JAR állományból áll, akkor az összes JAR-t a
+classpath-ra kell tenni úgy, hogy a `-classpath` kapcsolónak paraméterül több
+JAR állományt adunk át.
+
+A JAR állományt a következő paranccsal lehet kitömöríteni:
+
+```shell
+jar xvf distjar-1.0-SNAPSHOT.jar
+```
+
+![JAR](images/jar.png)
+
+## Ellenőrző kérdések
+
+* Mire valók a JAR állományok?
+* Hogyan épülnek fel a JAR állományok?
+* Hogyan lehet futtatni egy JAR állományban lévő osztályban található `main()` metódust?
+* Hogyan lehet futtathatóvá tenni egy JAR állományt?
+
+## Gyakorlati feladatok
+
+A `distjar` csomagba dolgozz!
+
+A feladatok megoldásai a `solutions/distjar` elérési úton vannak.
+
+### Gyakorlati feladat - JAR állomány készítése
+
+Hozz létre egy teljesen új projektet (pl. a `C:\training\distjar` könyvtárba `distjar` néven), ami
+egy `distjar.Main` osztályt tartalmaz `main()` metódussal.
+Ez a `Hello User!` szöveggel üdvözli a felhasználót!
+
+Készíts JAR-t az alkalmazásból az `mvn clean package` parancs kiadásával!
+
+### Gyakorlati feladat - Futtatható JAR állomány készítése
+
+A `pom.xml` állományt egészítsd ki a következővel:
+
+```xml
+<build>
+    <plugins>
+        <plugin>
+            <artifactId>maven-jar-plugin</artifactId>
+            <configuration>
+                <archive>
+                    <manifest>
+                        <mainClass>distjar.Main</mainClass>
+                    </manifest>
+                </archive>
+            </configuration>
+        </plugin>
+    </plugins>
+</build>
+```
+
+Készíts JAR-t az alkalmazásból az `mvn clean package` parancs kiadásával!
+
+A JAR állomány futtatható a `java -jar target\distjar-1.0-SNAPSHOT.jar`
+paranccsal.
+
+# Szöveges típus
+
+## Elmélet
+
+Javaban a **karakterláncokat**, szövegeket a `String` osztály reprezentálja. Ugyanúgy
+példányosítható, mint más osztályok, de a String literált a JVM példányosítja
+helyettünk. A szöveget idézőjelek közé kell tennünk, például `"alma"`. Az üres
+szöveg literálja a `""`, ami nem ugyanaz, mint a `null`. Szövegek összefűzésére
+(konkatenálására) használható a `+` operátor. Mivel a String típusú változó
+referenciát tárol, ezért nem használható két szöveg összehasonlítására a `==`
+operátor, ezeket a String `equals()` metódusával tudjuk vizsgálni, például `"abc".equals("abc")`
+(ennek az értéke `true`). Két szöveg meg nem egyezését pedig olyan módon lehet vizsgálni,
+hogy a kifejezés elé felkiáltójelet téve negáljuk azt, tehát például `!"abc".equals("def")`
+(ennek az értéke `true`).
+
+## Metódusok
+
+* `boolean equals(String str)`: a szöveg betűről betűre megegyezik-e a paraméterként átadott másik szöveggel.
+* `int indexOf(String substring)`: a paraméterként átadott szöveg hol kezdődik az adott szövegben. Ha nem található, akkor -1-gyel tér vissza. A karakterek indexelése, sorszámozása 0-ról indul.
+* `int indexOf(String substring, int startIndex)`: a paraméterként átadott szöveg hol kezdődik az adott szövegben, de a keresést csak a `startIndex`-től kezdi. Ha nem található, akkor -1-gyel tér vissza.
+* `int length()`: a szöveg hosszát adja vissza.
+* `String substring(int beginIndex)`: visszaadja a szöveg egy részét a megadott indextől kezdve a végéig.
+* `String substring(int beginIndex, int endIndex)`: visszaadja a megadott indexek közé eső szövegrészt. A bal oldali indexű
+  karaktert még tartalmazni fogja, a jobb oldalit nem
+
+![substring metódus működése](images/substr.png)
+
+A képen látható metódushívás eredménye: `oh`
+
+Vigyázni kell a műveletek sorrendjére is!
+
+A `"John" + 4 + 4` kifejezés értéke `John44`, mert összefűzi a `John` és `4` értékeket,
+és utána fűz még egy `4` értéket. a `4 + 4 + "John"` kifejezés először elvégzi a `4 + 4`
+műveletet, aminek eredménye `8`, és csak utána fűzi hozzá a `John` szöveget.
+
+## Ellenőrző kérdések
+
+* Milyen típus a `String`?
+* Hogyan definiálható `String` literál?
+* Hogyan lehet két `String`-et összekapcsolni?
+* Hogyan lehet egy `String`-et és egy primitív típust összekapcsolni?
+* Hogyan lehet két `String`-et összehasonlítani?
+
+## Gyakorlati feladat
+
+A `stringtype` csomagba dolgozz!
+
+A feladatok megoldásai a `solutions/stringtype` elérési úton vannak.
+
+### Gyakorlati feladat - String műveletek
+
+A `stringtype.StringTypeMain` osztály `main()` metódusában
+definiálj `prefix` néven egy `String` típusú változót, és add neki értékül
+a `"Hello "` literált.
+
+Definiálj `name` néven egy `String` típusú változót, és add neki értékül
+a `John Doe` literált.
+
+Definiálj egy `message` változót, melynek értéke legyen az előző két változó, összefűzve.
+
+A `message` változó értékét írd felül a `message` változó értékével
+úgy, hogy hozzákapcsolod még a `444` int literál értékét.
+
+A `b` logikai változó tartalmazza, hogy a `message` értéke megegyezik-e
+a `"Hello John Doe"` literál értékével.
+
+A `c` logikai változó tartalmazza, hogy a `message` értéke megegyezik-e
+a `"Hello John Doe444"` értékkel.
+
+Írd is ki minden, eddig definiált változó értékét!
+
+Konkatenálj össze két üres `String`-et, és írd ki az értékét! Írd ki a
+hosszát is! Hány karakter hosszú lesz?
+
+Írd ki külön sorban, külön utasításokban a következőket:
+
+* Az `Abcde` String hossza
+* Az első és harmadik karaktere (0-tól indexelünk) vesszővel elválasztva
+* Az elsőtől a harmadik karakterig tartó részlete
+
+<!-- [rating feedback=java-stringtype-stringoperations] -->
+
+### Gyakorlati feladat - Regisztrációs adatok vizsgálata
+
+Amikor egy weboldalon regisztrációkor megadjuk az adatainkat, gyakran kapunk
+olyan visszajelzést, hogy a jelszavunk nem elég erős, vagy nem valid
+email címet adtunk meg. Készíts egy `UserValidator` osztályt a `stringtype.registration`
+csomagba, mely a regisztrációkor megadott adatokat validálja.
+
+![UserValidator UML](images/uservalidator_class.png)
+
+Regisztrációkor meg kell adnunk a felhasználónevet, a jelszót kétszer
+és az email címet. A három metódus ezeket ellenőrzi:
+
+* A felhasználónév megadása kötelező.
+* A jelszó legalább 8 karakter hosszú kell legyen, és a két megadott jelszónak egyeznie kell.
+* Az email címben kell lennie `@` karakternek és valamikor utána (de nem közvetlenül) pontnak. A `@`
+  karakter nem lehet az első, az őt követő pont pedig az utolsó.
+
+Tételezzük fel, hogy egyik érték sem lehet `null`, mivel konzolról kerül beolvasásra,
+ezért maximum üres String (`""`).
+
+Készíts ugyanoda egy `Registration` osztályt, ahol a `main()` metódusban kérd be az
+adatokat! Írd ki a felhasználónak egyenként, hogy a megadott adat helyes vagy helytelen!
+Használd a háromoperandusú operátort!
+
+# Sortörés kezelése
+
+## Elmélet
+
+Ha sortörést szeretnénk, akkor speciális karaktereket kell alkalmaznunk. A **sortörés karakter**,
+karakterek nem láthatóak, tehát nem jelennek meg egy nyomtatott papíron vagy a képernyőn.  
+Használatukkal azt lehet elérni, hogy az utánuk következő szövegrész új sorban fog megjelenni.
+
+Különböző operációs rendszerek esetén máshogyan reprezentálják a sortörés karaktert:
+
+* Windows esetén két bájton két karakter: egy _Carriage Return_ (kocsivissza) és egy _Line Feed_ (soremelés) karakter.
+* Linux esetén egy bájton egy karakter van, egy _Line Feed_ (soremelés) karakter.
+
+A Java a `System.out.println()` metódus használatakor a kiírandó szöveg után automatikusan
+odatesz egy soremelés karaktert is.
+
+```java
+System.out.println("John");
+System.out.println("Doe");
+
+John 
+Doe
+```
+
+Abban az esetben, ha csak önmagában írjuk le a `System.out.println()` metódust, és nem adunk neki át
+kiírandó szöveget, a konzolon egyetlen (láthatatlan) sortörés karakter fog megjelenni, és egy
+következő szöveg már egy sorral lejjebb fog kiírásra kerülni:
+
+```java
+System.out.println("John");
+System.out.println();
+System.out.println("Doe");
+
+John 
+        
+Doe
+```
+
+`System.out.print()` metódus használata esetén pedig ez nem történik meg, tehát az egymás után
+kiírandó szövegek egymás mellett fognak megjelenni.
+
+```java
+System.out.print("John");
+System.out.print("Doe");
+
+JohnDoe
+```
+
+Javaban a sortörés karaktereket speciális szimbólumokkal jelöljük. A kocsivissza karakter
+jelölése `\r`, a soremelésé pedig `\n`. Ha egy szöveget sortöréssel szeretnénk kiírni, akkor
+azt Windowsban a következő módon is megtehetjük:
+
+```java
+System.out.println("John\r\nDoe");
+```
+
+Itt a `\r\n` ugyan 4 db karakterrel írandó ki, de ezek valójában csak két karakternyi helyet
+foglalnak el a kiírt szövegben. Linuxban ugyanez a következőképpen néz ki:
+
+```java
+System.out.println("John\nDoe");
+```
+
+Elég gyakran előfordul, hogy Windowsban is ennyit használunk összesen, a kocsivissza
+karakter pedig kimarad. Mindkét esetben ugyanaz jelenik meg a konzolon:
+
+```text
+John
+Doe
+```
+
+Stringek konkatenálása esetén önmagában is használhatjuk a sortörés karakert, ahogyan az az
+alábbi kódrészletben is látható:
+
+```java
+System.out.println("John" + "\n" + "Doe");
+```
+
+Sortörés karaktert megadhatunk operációs rendszer függetlenül is úgy, hogy lekérjük az adott
+operációs rendszerre jellemző sortörés karaktert. Ehhez a `System.lineSeparator()` metódust kell használnunk.
+
+```java
+System.out.println("John" + System.lineSeparator() + "Doe");
+```
+
+Hosszú Stringek tárolása történhet egy sorban, de így hamar olvashatatlanul hosszúvá válhat az
+adott String. Ezért inkább érdemes több sorban leírni és konkatenálni az egyes részeit.
+Ha csak egyszerűen `+` jelekkel konkatenálunk, akkor a szövegben még nem keletkezik automatikusan
+sortörés. Ehhez az is szükséges, hogy az egymáshoz konkatenált részekhez odaírjuk a megfelelő
+helyekre a sortörés karaktereket.
+
+```java
+String names = "John Doe\n" +
+               "Jack Doe\n" +
+               "Jane Doe\n";
+
+John Doe 
+Jack Doe 
+Jane Doe
+```
+
+## Ellenőrző kérdések
+
+* Mit jelent az a fogalom, hogy "sortörés karakter"?
+* Hogyan használjuk különböző operációs rendszerek esetében?
+* Hogyan használjuk Javaban?
+* Miben különbözik a `System.out.println()` és a `System.out.print()` metódus működése?
+* Hányféle módon érhetjük el, hogy sortörés legyen egy kiírandó szövegben?
+* Hogyan adhatunk meg Javaban sortörést operációs rendszer függetlenül?
+* Milyen módokon tárolhatunk hosszú Stringeket?
+
+## Gyakorlati feladatok
+
+A `linebreak` csomagba dolgozz!
+
+### Gyakorlati feladat - Településnevek
+
+Írj ki a `CityNames` osztályban három településnevet a konzolra egymás alá úgy, hogy kizárólag
+egyetlen `System.out.print()` utasítást használsz!
+
+### Gyakorlati feladat - Autómárka
+
+Írj a `Car` osztályba egy `public String getBrandAndTypeInSeparateLines(String brand, String type)` metódust, amely
+úgy adja vissza az autó márka- és típusnevét, hogy ezek egymás alatti sorokba kerüljenek! Az osztály `main()`
+metódusában ellenőrizd, hogy tényleg ez kerül-e a konzolra!
+
+# Dátum- és időkezelés alapok
+
+## Elmélet
+
+A Java fejlődése során több jelentős változáson ment át a dátum-idő kezelés. Az
+első eszköz erre a `java.util.Date` osztály volt, ami mellé később a `java.util.Calendar`
+osztály társult. A `Date` egy
+időpontot reprezentált, míg a `Calendar` szállította a dátumok kezeléséhez
+szükséges elemeket, mint például a hét napjainak neveit és még sok minden mást.
+Ez azonban a gyakorlatban túl bonyolult lett, ezért a Java 8 kiadásakor
+megjelentek a dátum és időkezelést együtt végző `java.time` csomag osztályai:
+
+* `LocalTime`, mely csak időpontot tárol, nanoszekundum pontossággal
+* `LocalDate`, mely csak dátumot tárol
+* `LocalDateTime` mely dátumot és időpontot is tárol, nanoszekundum pontossággal
+
+Objektumai nem a szokásos `new` operátorral hozhatók létre, hanem a különböző
+paraméterezésű `of()` metódusokkal. Látható, hogy akár a hónap
+nevét is meg lehet adni.
+
+```java
+LocalDate start = LocalDate.of(2015, 1, 20);
+LocalDate stop = LocalDate.of(2015, Month.JANUARY, 30);
+
+LocalDateTime from = LocalDateTime.of(2015, 1, 20, 10, 15);
+LocalDateTime to = LocalDateTime.of(2015, Month.JANUARY, 30, 10, 15);
+LocalDateTime now = LocalDateTime.of(2015, Month.JANUARY, 20, 10, 15, 30);
+
+LocalTime begin = LocalTime.of(10, 15);
+```
+
+![Dátum és időkezelés](images/introdate.png)
+
+Mindhárom osztály esetében rendelkezésünkre áll a `now()` metódus, amely a számítógép
+rendszeridejének megfelelő dátumot és/vagy időt adja vissza.
+
+A Java képes a dátumok és idők olvasható megjelenítésére az ISO-8601 szabványnak
+megfelelően.
+
+```java
+LocalDateTime localDateTime = LocalDateTime.now();
+System.out.println(localDateTime); // 2015-01-20T10:15:30
+```
+
+Egyik osztály sem alkalmas időzónák kezelésére.
+
+A `LocalDate`, `LocalTime` és `LocalDateTime` osztályok által reprezentált dátum- és időadatok kezelése
+természetesen nem korlátozódik csupán a létrehozásukra, hanem további műveleteket is végezhetünk rajtuk.
+Az alábbiakban felsorolt metódusok olyanok, amelyek több osztályban is megtalálhatóak. Amelyek dátummal
+dolgoznak, azok a `LocalDate` és a `LocalDateTime` osztályban is elérhetőek, amelyek pedig időponttal
+dolgoznak, azok a `LocalTime` és a `LocalDateTime` osztályokban.
+
+* `getYear()` - lekérdezhető a dátumból az év (`int` típus).
+* `getMonth()` - lekérdezhető a dátumból a hónap (`Month` típus).
+* `getMonthValue()` - lekérdezhető a dátumból a hónap (`int` típus).
+* `getDayOfMonth()` - lekérdezhető a dátumból a nap (`int` típus).
+* `getDayOfWeek()` - lekérdezhető a dátumból a nap (`DayOfWeek` típus).
+* `getHour()` - lekérdezhető az időpontból az óra (`int` típus).
+* `getMinute()` - lekérdezhető az időpontból a perc (`int` típus).
+* `getSecond()` - lekérdezhető az időpontból a másodperc (`int` típus).
+* `isBefore()` és `isAfter()` - ezek mindhárom osztályban elérhetőek, és paraméterül egy másik ugyanolyan
+  típusú objektumot kell nekik megadni. Azt adják vissza, hogy a hívó példány előbb van-e, mint a
+  paraméterül átadott (`isBefore()`), illetve hogy később van-e (`isAfter()`).
+
+Az alábbi kódrészlet például a következőket írja a konzolra:
+
+```java
+LocalDate date = LocalDate.of(2021, 4, 20);
+
+System.out.println(date.getYear()); // 2021
+System.out.println(date.getMonth()); // APRIL
+System.out.println(date.getMonthValue()); // 4
+System.out.println(date.getDayOfMonth()); // 20
+System.out.println(date.getDayOfWeek()); // TUESDAY
+System.out.println(date.isBefore(LocalDate.of(2022, 1, 1))); // true
+System.out.println(date.isAfter(LocalDate.of(2022, 1, 1))); // false
+```
+
+## Ellenőrző kérdések
+
+* Mit tárol a `LocalDateTime` objektum?
+* Hogyan lehet egy `LocalDate` vagy `LocalDateTime` objektumot létrehozni?
+* Mire való a statikus `now()` metódus?
+* Milyen pontossággal lehet az időt megadni?
+* Milyen további műveleteket végezhetünk a létrehozott dátum- és időadatokon?
+
+## Gyakorlati feladatok
+
+Az `introdate` csomagba dolgozz!
+
+A feladatok megoldásai a `solutions/introdate` elérési úton vannak.
+
+### Gyakorlati feladat - Alkalmazott nyilvántartása
+
+Egy olyan osztályt - `Employee` - akarunk létrehozni, amely egy alkalmazott
+felvételekor rögzíti a munkába álló főbb adatait. Rögzíti a nevét `name`,
+születési dátumát `dateOfBirth` és a belépés pillanatát `beginEmployment`
+(amikor az objektumot létrehozzuk). Az osztály konstruktorában adjuk meg a
+felvett adatokat, és ezek alapján a konstruktor létrehozza az objektumot.
+Mivel a felvétel után csak a dolgozó neve módosítható, getter metódus mindegyik attribútumra kell,
+de setter metódus csak a nevére szükséges.
+
+![Employee UML](images/employee_class.png)
+
+Az osztály tesztelését az `EmployeeTest` osztály `main()` metódusában végezd el! Az
+alkalmazott belépéséhez szükséges adatokat olvasd be, majd az objektum létrehozása
+után írd ki annak minden adatát!
+
+<!-- [rating feedback=java-introdate-employee] -->
+
+### Gyakorlati feladat - Előadók fellépései
+
+Adott előadó fellépéseit szeretnénk nyilvántartani egy Java alkalmazásban, ehhez
+viszont szükségünk van egy, az adatokat rögzítő `Performance` osztályra. A fellépés
+dátumát (`date`), előadót (`artist`), és kezdési és befejezési idejét (`startTime` és `endTime`) szeretnénk tárolni.
+Az egyes attribútumok természetesen lekérdezhetők, így getter metódus mindegyikre kell,
+de az adatok rögzítése után azok változtatására már ne legyen lehetőség,
+azaz nincs szükség setter metódusokra.
+
+Az osztály tesztelését a `PerformanceTest` osztály `main()` metódusában `System.out`
+kiírások formájában végezd! Az objektum létrehozásához szükséges adatokat most nem kell
+beolvasnod a felhasználótól.
+
+Írj egy `getInfo()` metódust, ami a következő formátumban adja vissza az előadás
+adatait:
+
+`"Queen: 1989-06-02 18:00 - 20:00"`
+
+<!-- [rating feedback=java-introdate-performance] -->
+
+### Gyakorlati feladat - Vizsgaidőpontok
+
+Egy egyetemi hallgató a félév végi vizsgáit szeretné nyilvántartani egy alkalmazásban.
+Készíts egy `Exam` nevű osztályt, amelynek legyen két attribútuma: `String subject` és
+`LocalDateTime examDate`! Készíts az osztálynak konstruktort és minden attribútumhoz
+készíts getter metódust is! Írj egy `String getMessage()` metódust, mely a következő
+formában ad vissza egy értesítést a vizsgáról:
+
+`The exam in subject Statics will be on the 5th of JUNE.`
+
+Ezután készíts egy `University` nevű osztályt, amelynek `main()` metódusában teszteld ezt az osztályt!
+Példányosíts két különböző vizsgát, majd írd ki a konzolra az egyiknek az adatait (tantárgy, időpont, és
+külön év, hónap, nap, óra, perc)!
+Írd ki a konzolra azt is, hogy az elsőként példányosított vizsga időpontja a másodikként
+példányosított időpontja előtt vagy után van-e! Végül írd ki mindkét vizsgáról az értesítéseket!
+
+# Bevezetés a vezérlési szerkezetekbe
+
+## Elmélet
+
+## Elágazás
+
+Ha egy utasítást egy feltételtől függően szeretnénk végrehajtani, akkor **elágazást**
+kell használnunk. Az elágazás egy fejből és egy törzsből áll. A fejben kell adnunk egy feltételt,
+amely mindig egy logikai értéket
+adó kifejezés. Ha a kiértékelése igaz, akkor végrehajtja a törzset, ami egy blokk, mely utasításokat tartalmazhat.
+
+```java
+System.out.println("Check");
+
+if ((x % 2) == 0) {
+    System.out.println("Even");
+}
+
+System.out.println("Done"); // 1
+```
+
+A példában, ha az `x` osztható 2-vel, akkor kiírja, hogy `Even`, majd az
+`1`-essel jelölt sorban történik a végrehajtás, és kiírja, hogy `Done`.
+
+Ha `x` nem osztható kettővel, átugorja a végrehajtás a feltétel törzsét, és kiírja, hogy `Done`.
+
+Az algoritmusokat, azaz a lépések sorozatát ún. **folyamatábrával** (**flowchart**) lehet grafikusan ábrázolni.
+Téglalapban találhatóak a lépések. A nyilak a lépések egymásutániságát jelölik.
+Az elágazást rombusz jelöli.
+
+![Elágazás](images/if.png)
+
+Meg lehet adni egy ún. `else` ágat, ekkor ha a feltétel igaz, akkor az első blokkot, ha hamis,
+akkor a második (`else` ágon lévő) blokkot hajtja végre.
+
+```java
+System.out.println("Check");
+
+if ((x % 2) == 0) {
+    System.out.println("Even");
+} else {
+    System.out.println("Odd");
+}
+
+System.out.println("Done");
+```
+
+![Else ág](images/ifelse.png)
+
+## Ciklus
+
+Ha egy utasításblokkot többször szeretnénk végrehajtani, akkor nem kell az
+utasításokat sokszor kiadnunk egymás után, hanem elég a programban megadnunk,
+hogy mely utasításokat és meddig szeretnénk végrehajtani. Ezt a szerkezetet
+**ciklusnak** nevezzük. A Java nyelv többféle
+megoldást nyújt erre. Ezek közül az egyik igen gyakran használt a `for`
+kulcsszóval jelölt ciklus. Fejből és törzsből áll. A fejrésze három részből áll: inicializációs rész,
+feltétel és léptetés. Törzsében azok az utasítások szerepelnek, amelyeket
+többször is végre szeretnénk hajtani.
+
+```java
+for (int i = 0; i < 10; i++) {
+    System.out.println(i);
+}
+```
+
+Az inicializációs részben a ciklusváltozó kezdőérték adása szerepel. Nagyon
+gyakran itt is deklaráljuk, ebben az esetben ez a cikluson kívülről nem érhető el.
+Először ez a rész fut le, méghozzá csak egyetlenegyszer. Ezután megvizsgálja a
+feltételt, és amennyiben igaz a kiértékelése, akkor végrehajtja a ciklusmagban
+megadott utasításokat, majd elvégzi a ciklusfejben megadott léptetést, és újra
+megvizsgálja a feltételt. Mindezt addig ismétli, amíg a feltétel hamissá nem
+válik, vagy valamilyen módon ki nem ugrunk a ciklusból.
+
+A ciklus fejében deklarált változó nem látszik a ciklus után
+
+A fenti példa valójában elszámol 0-tól 9-ig.
+
+A folyamatábrában nincs szabványos jelölés a ciklusra, hiszen a feltétellel és nyilakkal lehet ábrázolni.
+
+![Else ág](images/loop.png)
+
+Az egyszerűség kedvéért azonban vannak rá elterjedt jelölések.
+
+![Else ág](images/loop-simple.png)
+
+## Ellenőrző kérdések
+
+* Hogyan lehet feltételes utasítást Javaban létrehozni?
+* Hogyan lehet ciklust használni Javaban?
+
+## Gyakorlati feladatok
+
+Az `introcontrol` csomagba dolgozz!
+
+A feladatok megoldásai a `solutions/introcontrol` elérési úton vannak.
+
+### Gyakorlati feladat - Bevezetés a vezérlési szerkezetek használatába
+
+Az `IntroControl` osztályban írd meg a következő metódusokat, majd az `introcontrol.IntroControlMain` osztály
+`main()` metódusában teszteld is őket!
+
+A `public int subtractTenIfGreaterThanTen(int number)` metódusban
+add vissza a paraméterként átadott értéket, ha az kisebb vagy egyenlő, mint 10, ellenkező esetben
+csökkentsd 10-zel, és azt add vissza!
+
+A `public String describeNumber(int number)` metódusban adj vissza `"zero"` értéket,
+ha a paraméterként átadott érték 0, és `"not zero"` értéket, ha nem 0!
+
+A `public String greetingToJoe(String name)` metódusban adj vissza `Hello Joe` értéket,
+ha a paraméterként átadott név `"Joe"`, és üres Stringet, ha nem!
+
+Az értékesítők 10% jutalékot kapnak az eladások alapján, de csak abban az esetben,
+ha a havi eladás értéke legalább 1 000 000 Ft.
+A `public int calculateBonus(int sale)` metódusban számold ki a jutalékot az eladási összeg alapján,
+és a jutalék összegét add vissza!
+
+A `public int calculateConsumption(int prev, int next)` metódusban
+számold ki a paraméterként megadott mérőóraállások közötti különbséget. Ha a
+villanyóra eléri a 9999 értéket, átfordul, és újraindul 0 értéktől. Tételezzük fel,
+hogy csak egyszer fordulhat át, és nem érheti el az előző értéket. Tételezzük fel,
+hogy 9999 értéknél nagyobbat nem kap paraméterül.
+
+A `public void printNumbers(int max)` metódussal írd ki a pozitív egész számokat (nullával kezdve)
+egészen a paraméterként megadott számig (az is legyen kiírva).
+
+A `public void printNumbersBetween(int min, int max)` metódussal írd ki a pozitív egész számokat a két
+paraméterként megadott érték között (a megadott értékeket is beleértve). Feltételezzük, hogy mindkét
+paraméterként kapott szám nagyobb vagy egyenlő nullával, valamint hogy az elsőként megadott szám kisebb, mint a
+második.
+
+A `public void printNumbersBetweenAnyDirection(int a, int b)` metódussal írd ki a pozitív egész számokat a két
+paraméterként megadott érték között (a megadott értékeket is beleértve). Ha az `a` értéke nagyobb, mint a `b` értéke,
+akkor csökkenő sorrendben történjen a kiíratás.
+
+A `public void printOddNumbers(int max)` metódussal írd ki a páratlan pozitív egész számokat (egytől indítva)
+egészen a paraméterként megadott számig (az is legyen kiírva, ha páratlan)!
+
+<!-- [rating feedback=java-introcontrol-introcontrolclass] -->
+
+### Gyakorlati feladat - Minősítő
+
+A `Qualifier` osztály `main()` metódusába dolgozz! Kérj be a felhasználótól egy számot,
+és ha az nagyobb, mint 100, akkor írd ki, hogy `Nagyobb, mint száz`, ellenkező esetben a
+`Száz, vagy kisebb` szöveget írd ki!
+
+### Gyakorlati feladat - Menürendszer
+
+Készíts egy konzolos menürendszert egy felhasználókat karbantartó
+alkalmazáshoz! Az alkalmazás indulásakor ki kell írni a következőt:
+
+```shell
+1. Felhasználók listázása
+2. Felhasználó felvétele
+Többi: Kilépés
+```
+
+Majd be kell írni egy számot. Egyes esetén ki kell írni, hogy `Felhasználók listázása`,
+kettes esetén `Felhasználó felvétele`. Egyéb esetben nem kell kiírni semmit.
+
+A `UserMenu` osztályba dolgozz!
+
+### Gyakorlati feladat - Összegszámítás
+
+Kérj be a felhasználótól ciklusban öt számot, és számold ki az összegüket. A  
+`Sum` osztályba dolgozz!
+
+### Gyakorlati feladat - Csónakok
+
+Egy csónakkölcsönzőben van 3 csónak. Az elsőben 5-en, a másodikban 3-an, a
+harmadikban 2-en férnek el. Amikor jön egy csoport, és szeretne csónakot bérelni,
+akkor úgy kell kiadni nekik a csónakokat, hogy miután kihajóznak, a lehető legtöbb
+hely és csónak maradjon bent egy következő csoportnak.
+
+Például ha 6-an jönnek, akkor az öt- és kétszemélyes csónakot kell kiadni nekik,
+mert így még akár egy 3 fős csapat is ki tud hajózni.
+
+Ha 5-en jönnek, akkor az 5 személyes csónakot kell kiadni nekik, mert így 2 csónak
+összesen 5 hellyel marad bent.
+
+Készíts egy  `BoatRental` osztályt, ahol a `main()` metódusban bekéred az érkező
+csapat létszámát, majd írd ki, hogy melyik csónakokat vitték el és még hány fő mehet utánuk!
+Ha többen voltak, mint 10, akkor jelezd, hogy maradtak még a parton!
+
+# Tömbök
+
+## Elmélet
+
+Eddig olyan adattípusokkal ismerkedtünk meg, amelyek csak egy egyszerű értéket
+tárolhatnak. A **tömb** már sok ugyanolyan típusú elem tárolására képes, amelyeket a
+sorszámukkal (**index**) közvetlenül elérhetünk.
+
+Deklarációkor meg kell adnunk, hogy milyen típusú elemeket szeretnénk tárolni benne.
+Létrehozni a `new` kulcsszóval lehet, és meg kell adnunk a tömb méretét is.
+
+```java
+int[] arrayOfNumbers = new int[10];
+```
+
+A tömb elemei mindig kapnak kezdőértéket: egész típusú elemek esetén ez `0`,
+lebegőpontos szám esetén `0.0`, logikai érték esetén `false`, osztály (referencia típus)
+esetén `null` lesz.
+
+Az elemek elérése szögletes zárójellel történik, amelybe az elem indexét kell
+írnunk. Az indexelés 0-tól kezdődik, és olyan indexre nem hivatkozhatunk, amely
+túlmutat bármelyik irányban az indexelés határain. Azaz egy 10 elemű tömb esetén
+az index csak 0 és 9 közötti értéket vehet fel. Például a fenti tömb 5. elemét
+az `arrayOfNumbers[4]` hivatkozással érhetjük el. Az `arrayOfNumbers[10]`
+esetén már `ArrayIndexOutOfBoundsException` hibaüzenetet kapunk.
+
+A tömb hosszát a `length` tulajdonságán át kérdezhetjük le: `arrayOfNumbers.length`.
+
+Létrehozhatunk tömb literált, amelyben a tömb elemeit tudjuk megadni kapcsos
+zárójelek között vesszővel elválasztva:
+
+```java
+String[] fruits = {"apple", "peach", "plum", "orange"};
+```
+Egy metódus paramétereként is használhatunk tömb literált a tömb létrehozására,
+de ebben az esetben eltérő a szintaktika:
+
+```java
+countArrayElements(new int[] {1, 2, 3, 4})
+```
+
+## Tömbök elemeinek bejárása
+
+A tömbök elemeit bejárhatjuk a már megismert `for` ciklussal, de létezik egy
+hatékonyabb módja is annak, hogy minden egyes elemet elérjünk: a **_for-each_ ciklus**.
+Ennek létrehozása a következő módon történik:
+
+```java
+for (String fruit: fruits) {
+    System.out.println(fruit);
+}
+```
+
+Itt a ciklus fejlécében a következők szerepelnek:
+
+* először definiálni kell egy változót (típus és változónév megadásával), amellyel hivatkozhatunk minden egyes elemre,
+  amelyen majd végigmegyünk. Ennek a típusa értelemszerűen meg kell, hogy egyezzen a tömbben található elemek típusával.
+* majd következik egy kettőspont (`:`).
+* végül pedig meg kell adni annak a tömbnek a nevét, amelyen végig akarunk menni.
+
+A _for-each_ ciklusban az történik, hogy minden egyes elemet "megfogunk", csinálhatunk vele valamit (például kiírhatjuk),
+majd "elengedjük" és megyünk a következő elemre. Ennek a ciklusnak a használata esetén a tömb elemeit csak kiolvasni
+tudjuk, de cserélni vagy törölni nem, illetve az elem sorszáma sem áll rendelkezésre. Amennyiben ezekre szükségünk van,
+használjuk a hagyományos `for` ciklust!
+
+Ha tömbök között akarunk adatokat átmásolni, akkor ciklussal bejárhatjuk a tömböt és egyenként
+átmásolhatjuk az elemeket, de létezik ennél jobb módszer is: a `System.arraycopy()` metódus.
+
+```java
+for (int i = 0; i < fruits.length; i++){
+	System.out.println(fruits[i]);
+}
+
+for (String fruit: fruits){
+	System.out.println(fruit);
+}
+
+String[] favoriteFruits = new String[2];
+System.arraycopy(fruits, 1, favoriteFruits, 0, 2); // favoriteFruits --> {"peach", "plum"}
+```
+
+## Ellenőrző kérdések
+
+* Hogyan definiálunk Javaban tömböt?
+* Hogyan férünk hozzá egy tömb eleméhez?
+* Hogyan kérjük le a tömb hosszát?
+* Hogyan definiálunk tömb literált?
+* Hogy lehet a tömb elemeit kiírni?
+* Hogyan járhatjuk be egy tömb elemeit?
+
+## Gyakorlati feladatok
+
+Az `array` csomagba dolgozz!
+
+### Gyakorlati feladat - Tömbök kezelése
+
+Az `ArrayMain` osztály `main()` metódusába dolgozz!
+
+Definiálj egy `String` tömböt a hét napjaival! Írd ki a második elemét (kedd)!
+Írd ki a tömb hosszát is!
+
+Definiálj egy öt elem hosszú `int` tömböt, amely a kettő hatványait fogja tartalmazni
+(1, 2, 4, 8, 16)! Ciklusban töltsd fel értékekkel! Az algoritmus az,
+hogy mindig az előző elem értékét szorozd meg kettővel!
+Ciklusban írd ki az értékeit egy sorba, szóközökkel elválasztva!
+
+Definiálj egy hat elemű `boolean` tömböt, és felváltva írj bele `true` vagy
+`false` értéket, 0. index esetén legyen `false`!
+Ciklusban töltsd fel! Az algoritmus az, hogy mindig az előző elemnek veszed
+a logikai negáltját.
+Ciklusban írd ki az elemeit egy sorba, szóközökkel elválasztva!
+
+Ahol lehet, használj for-each ciklust!
+
+<!-- [rating feedback=java-array-arraymain] -->
+
+### Gyakorlati feladat - Plusz index
+
+Hozz létre egy `ArrayHandler` osztályt, és implementálj benne egy
+`void addIndexToNumber(int[] source)` metódust, mely egy egész számokat tartalmazó tömb minden
+eleméhez hozzáadja a tömbbeli indexét!
+
+Írj egy `void concatenateIndexToWord(String[] source)` metódust is, mely egy szavakat tartalmazó
+tömb minden eleme elé hozzárakja a tömbbeli indexét!
+
+Az osztály `main()` metódusában definiálj egy egész számokat és egy szavakat tartalmazó
+tömböt, amelyeken tesztelni tudod az előzőleg megírt metódusokat! Írd ki az elemeiket kétféleképpen:
+először elemenként külön sorba, majd végül egy sorba az elemeket, egymástól vesszővel és szóközzel elválasztva!
+
+Ahol lehet, használj for-each ciklust!
+
+<!-- [rating feedback=java-array-arrayhandler] -->
