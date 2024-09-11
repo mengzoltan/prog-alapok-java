@@ -2,6 +2,7 @@ package com.training360.cinema;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Random;
 
 public class CinemaMain {
 
@@ -30,7 +31,11 @@ public class CinemaMain {
 
         allee.printSeats();
 
-        Guest anonim = allee.getGuestBySeat(1,1);
+        Random random = new Random();
+        int row = random.nextInt(2);
+        int col = random.nextInt(3);
+        System.out.println(row + ", " + col);
+        Guest anonim = allee.getGuestBySeat(row,col);
         System.out.println(anonim);
 
 
