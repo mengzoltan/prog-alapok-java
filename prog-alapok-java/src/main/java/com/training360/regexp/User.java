@@ -12,14 +12,17 @@ import java.util.Set;
 
 
 public class User {
+
     @NotNull
     @Pattern(regexp = ".+@.+\\.[a-z]+", message = "Invalid email address!")
     @Size(min = 3, max = 11)
     private String email;
 
     public static void main(String[] args) {
+
         User user = new User();
         user.setEmail("sdf@admin.com1");
+
         try (ValidatorFactory factory = Validation.buildDefaultValidatorFactory()){
             Validator validator = factory.getValidator();
             Set<ConstraintViolation<User>> constraintViolations = validator.validate(user);
