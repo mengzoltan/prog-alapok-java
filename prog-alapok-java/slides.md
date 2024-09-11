@@ -6011,3 +6011,643 @@ Páros szám beérkezésekor érjen véget a program futása! Ha esetleg nem sz�
 keletkező `NumberFormatException`-t kezeld le és dobj helyette egy `IllegalArgumentException`-t egy megfelelő
 tájékoztató szöveggel! Írj `finally` ágat is, és abban írd ki minden kör után, hogy "End of round."
 
+# Összegzés tétele
+
+## Elmélet
+
+## Nevezetes algoritmusok
+
+Vannak olyan problémák, amik gyakran előfordulnak a programozás során, így az ezekre alkalmazott algoritmusokat
+külön névvel látták el, **programozási tételeknek** vagy **nevezetes algoritmusoknak** hívják őket.
+Ezek általában valamilyen tömbön vagy listán dolgoznak. Nézzük ezeket sorban:
+
+*	Összegzés tétele
+*	Számlálás tétele
+*	Szélsőérték-keresés
+*	Eldöntés tétele
+
+## Összegzés tétele
+
+Az algoritmus bemenete egy n elemű lista. Egyszerűbb esetben számokat tartalmazó lista,
+de akár objektumokat tartalmazó lista is lehet, az objektumokhoz tartozó valamilyen számértékkel.
+Ezeket a számokat illetve számértékeket akarjuk összeadni.
+
+### Elméleti megvalósítás
+
+*	Változó deklarálása
+*	Ciklusban iterálás
+*	Ha szükséges, feltétel az elemre
+*	Ha szükséges, az elem konvertálása számmá
+*	Összeghez hozzáadni a számot
+*	Összeget visszaadni
+
+### Gyakorlati megvalósítás
+
+```java
+public int sum(List<Integer> numbers) {
+    int sum = 0;
+    for (Integer n: numbers) {
+        sum += n;
+    }
+    return sum;
+}
+```
+
+```java
+public int ageSumCalculator(List<Trainer> trainers){
+    int sum = 0;
+    for (Trainer trainer: trainers){
+        sum += trainer.getAge();
+    }
+    return sum;
+}   
+```
+
+## Ellenőrző kérdések
+
+* Mi a bemenete és a kimenete az összegzés algoritmusának?
+* Mi legyen a kezdőértéke a majdani visszatérési értéket tároló változónak?
+
+## Gyakorlati feladatok
+
+Az `algorithmssum` csomagba dolgozz!
+
+### Gyakorlati feladat - Iskolába járó diákok száma
+
+A `school` csomagban hozz létre egy `School` osztályt, amelyben a `getNumberOfStudents(List<Integer> headcounts)`
+metódus kap egy listát az iskola osztályainak létszámáról. A metódus a lista alapján számolja ki és adja vissza az
+iskola összes diákjának számát!
+
+### Gyakorlati feladat - Értékesítők számai
+
+Hozz létre egy `sales.Salesperson` osztályt a szükséges attribútumokkal:
+
+* `name`, az értékesítő kolléga neve
+* `amount`, az üzletkötéseiből származó árbevétel
+
+A feladat egy metódus megírása a `sales.SalesAmountSum` osztályban, ami paraméterül kapja a cég értékesítőit
+tartalmazó listát, és összegzi a cég összes értékesítőjének árbevételét. A metódus pontos nevét megtalálod a
+tesztesetben.
+
+<!-- [rating feedback=java-algorithmssum-ertekesitok] -->
+
+### Gyakorlati feladat - Összes jóváírás
+
+Hozz létre a `transactions` csomagban egy `Transaction` osztályt a szükséges attribútumokkal:
+
+* `accountNumber`, számlaszám
+* `transactionOperation` (TransactionOperation enum, CREDIT vagy DEBIT)
+* `amount`, a tranzakció összege
+
+Hozz létre egy `TransactionSum` osztályt, amelyben van
+egy `int sumAmountOfCreditEntries(List<Transaction> transactions)` metódus,
+amely összegzi a credit tranzakciók összegét.
+
+<!-- [rating feedback=java-algorithmssum-jovairas] -->
+
+### Gyakorlati feladat - Kétjegyű páratlanok
+
+Írj egy `getSum()` metódust a `TwoDigitOdds` osztályba, mely visszaadja az összes olyan
+kétjegyű páratlan pozitív egész szám összegét, mely nem osztható 5-tel!
+
+# Számlálás tétele
+
+## Elmélet
+
+Az algoritmus bemenete egy n elemű lista. A feladat az, hogy számoljuk meg azokat az elemeket,
+amelyekre igaz egy feltétel. Például számoljuk meg a 15-nél nagyobb számokat egy listában.
+
+### Elméleti megvalósítás
+
+*	Változó deklarálása számlálónak
+*	Ciklusban iterálás
+*	Feltétel teljesülése esetén számláló növelése
+*	Számláló visszaadása
+
+### Gyakorlati megvalósítás
+
+```java
+public int countLetters(String s, char c) {
+    int count = 0;
+    for (int i = 0; i < s.length(); i++) {
+        if (s.charAt(i) == c) {
+            count++;
+        }
+    }
+    return count;
+}
+```
+
+```java
+public int countElderly(List<Trainer> trainers, int minAge ) {
+      int count = 0;
+      for (Trainer trainer: trainers) {
+          if (trainer.getAge() >= minAge) {
+              count++;
+          }
+      }
+      return count;
+  }
+```
+
+## Ellenőrző kérdések
+
+* Mi a bemenete és a kimenete a számlálás algoritmusának?
+* Mi legyen a kezdőértéke a majdani visszatérési értéket tároló változónak?
+
+## Gyakorlati feladatok
+
+Az `algorithmscount` csomagba dolgozz!
+
+### Gyakorlati feladat - Magassági korlát
+
+Egy játszótéri eszközön csak egy bizonyos magasságnál magasabb gyerekek játszhatnak. A `height.Height`
+osztályban legyen egy `countChildrenWithHeightGreaterThan()` metódus, amelynek két paramétere egy
+egész számokat tartalmazó lista, amelyben egy csapatnyi gyerek centiméterben mért
+magassága található, valamint egy meghatározott magassági korlát (szintén centiméterben)! A metódus feladata,
+hogy adja vissza, az adott gyerekcsoportból hányan játszhatnak a játszótéri játékon.
+
+### Gyakorlati feladat - Nagy összegű bankszámlák
+
+Hozz létre egy `bankaccount.BankAccount` osztályt a szükséges attribútumokkal:
+
+* `nameOfOwner`, a számla tulajdonosának neve
+* `accountNumber`, a számlaszám
+* `balance`, egyenleg
+
+Feladat egy metódus megírása a `BankAccountCondition` osztályban, ami megszámlálja, hány olyan számla van,
+amelynek az aktuális egyenlege meghaladja a paraméterként kapott alsó határt. A metódus nevét megtudhatod a tesztesetből.
+
+<!-- [rating feedback=java-algorithmscount-bankszamlak] -->
+
+### Gyakorlati feladat - Kis összegű tranzakciók
+
+Hozz létre egy `transaction.Transaction` osztályt, a szükséges attribútumokkal:
+
+* `accountNumber`, számlaszám
+* `transactionType` (CREDIT vagy DEBIT, egy külön `TransactionType` enum)
+* `amount`, a tranzakció összege
+
+Feladat egy metódus megírása a `TransactionService` osztályban, ami megszámlálja, hány olyan tranzakció van,
+amely credit és a paraméterként kapott összeghatárnál kisebb értékű. A metódus nevét megtudhatod a tesztesetből.
+
+<!-- [rating feedback=java-algorithmscount-tranzakciok] -->
+
+### Gyakorlati feladat - Kétjegyű számok számjegyei
+
+A `Digits` osztályba írj egy `getCountOfNumbers()` metódust, amely a következő matematikai feladat megoldását adja vissza:
+Hány olyan kétjegyű pozitív egész szám van, amelyben az egyik számjegy 5-tel nagyobb a másiknál?
+
+# Szélsőérték-keresés tétele
+
+## Elmélet
+
+Az algoritmus bemenete egy n elemű lista. A feladat, hogy visszaadjuk azt az elemet,
+ami a legnagyobb vagy a legkisebb, az elemeknek ezért összehasonlíthatónak kell lenniük.
+Figyelnünk kell az egyenlőségre. Ilyen esetben általában az első vagy az utolsó elemet szokás
+visszaadni, de lehet, hogy az összeset.
+
+### Elméleti megvalósítás
+
+*	Változó deklarálása szélsőértéknek. Ha például maximum értéket keresünk, akkor egy olyan értéket kell itt
+     a változóban definiálni, amelyik egészen biztosan kisebb a listában található összes számértéknél. De azt
+     is lehet csinálni, hogy a lista első elemét (vagy az ahhoz tartozó összehasonlítható értéket) adjuk
+     értékül a változónak, mert ha van a listában nála nagyobb, akkor az algoritmus úgyis megtalálja azt,
+     ha pedig nincs, akkor ezek szerint az első elem a legnagyobb.
+     Minimumkeresésnél értelemszerűen ugyanez fordítva értendő.
+*	Ciklusban iterálni
+*	Amennyiben a ciklusváltozó nagyobb, kisebb, a szélsőértéket le kell cserélni a ciklusváltozó értékére
+*	Szélsőérték visszaadása
+
+### Gyakorlati megvalósítás
+
+```java
+public int max(List<Integer> numbers) {
+    int max = Integer.MIN_VALUE;
+    for (Integer n: numbers) {
+        if (n > max) {
+            max = n;
+        }
+    }
+    return max;
+}
+```
+
+```java
+public int getMax(List<Integer> numbers) {
+    int max = numbers.get(0);
+    for (int i : numbers) {
+        if (i > max) {
+            max = i;
+        }
+    }
+    return max;
+}
+```
+
+```java
+public Trainer trainerWithMaxAge(List<Trainer> trainers) {
+    Trainer trainerWithMaxAge = null;
+    for (Trainer trainer: trainers) {
+        if (trainerWithMaxAge == null || trainer.getAge() > trainerWithMaxAge.getAge()) {
+            trainerWithMaxAge = trainer;
+        }
+    }
+    return trainerWithMaxAge;
+}
+```
+
+## Ellenőrző kérdések
+
+* Mi a bemenete és a kimenete a szélsőérték kiválasztás algoritmusának?
+* Mi legyen a kezdőértéke a majdani visszatérési értéket tároló változónak?
+
+## Gyakorlati feladatok
+
+Az `algorithmsmax` csomagba dolgozz!
+
+### Gyakorlati feladat - Napi minimum hőmérséklet
+
+Hozz létre egy `temperature.Temperature` osztályt, valamint benne egy `getMin(List<Integer>)`metódust,
+ami paraméterként kap egy listát az elmúlt napon mért hőmérsékleti értékekből, és kiválasztja közülük a legkisebbet.
+
+<!-- [rating feedback=java-algorithmsmax-maxszam] -->
+
+### Gyakorlati feladat - A legmagasabb hegycsúcs
+
+Hozz létre egy `hill.Hill` osztályt, és benne egy `getMax(List<Integer>)` metódust, ami paraméterként
+kap egy listát hegycsúcsok méterben mért magassági értékeivel, és kiválasztja közülük a legnagyobbat.
+
+### Gyakorlati feladat - Legidősebb trainer
+
+Hozz létre egy `trainer.Trainer` osztályt a következő attribútumokkal:
+
+* `name`, a trainer neve
+* `age` , az életkora
+
+A feladat:
+
+* Egy `MaxAgeCalculator` osztályban hozz létre egy `Trainer getTrainerWithMaxAge(List<Trainer> trainers)`
+  metódust, amely kikeresi a legidősebb trainert.
+
+<!-- [rating feedback=java-algorithmsmax-trainer] -->
+
+### Gyakorlati feladat - Legjobb értékesítő
+
+Hozz létre egy `sales.Salesperson` osztályt a szükséges attribútumokkal:
+
+* `name`, az értékesítő kolléga neve
+* `amount`, az üzletkötéseiből származó árbevétel
+* `target`, a cél árbevétel, amit az adott értékesítő számára előírt az értékesítési igazgató
+
+Készíts egy `getDifferenceFromTarget()` nevű metódust, amely visszaadja az üzletkötésekből származó árbevétel
+és a cél árbevétel különbségét!
+
+Feladat a következő metódusok megírása a `Sales` osztályban:
+
+* `selectSalesPersonWithMaxSalesAmount(List<Salesperson> sales)` : kiválasztja a legnagyobb árbevételt elért értékesítőt
+* `selectSalesPersonWithFurthestAboveTarget(List<Salesperson> sales)` : kiválasztja azt az értékesítőt, aki a célt a legnagyobb összeggel meghaladta
+* `selectSalesPersonWithFurthestBelowTarget(List<Salesperson> sales)` : kiválasztja azt az értékesítőt, aki a legnagyobb összeggel alulmúlta a célt
+
+<!-- [rating feedback=java-algorithmsmax-ertekesito] -->
+
+### Gyakorlati feladat - Repülőgéppel az óceán fölött
+
+A `Plane` osztályban írd meg a `getLongestOcean(String map)` metódust, amely adja vissza a következő feladat megoldását:
+
+Egy repülőgéppel átszeljük az óceánt és a közben méréseket végzünk. Tudjuk, hogy partól indulunk és parthoz érünk.
+A méréseket adott időközönként egyenletesen végezzük. A mérések azt mutatják, hogy sziget vagy óceán fölött repülünk
+éppen. Az 1-es szigetet míg a 0 óceánt jelöl. pl.: 111000010100001 sorozatban egy három "hosszú" sziget majd négy
+hosszú "óceán", aztán sziget, víz, sziget, majd óceán és végül egy szigeten leszálltunk. A feladat az, hogy "repüljünk"
+a térkép fölött végig és határozzuk meg a leghosszabb óceán szakasz hosszát. A térkép fölött csak egyszer repülhetünk
+el és amikor leszálltunk már tudnunk is kell az eredményt.
+
+A térkép: 10000000111110000000000001111111111000010000010000100000111111110000101000000000111110000000000000000100000001000000000000111111000000000100000000000011
+
+# Eldöntés tétele
+
+## Elmélet
+
+Az algoritmus bemenete egy n elemű lista. A feladat az, hogy döntsük el, van-e olyan elem a listában,
+amelyre igaz egy feltétel.
+
+### Elméleti megvalósítás
+
+*   Változó deklarációja a találat tényének (hamis, vagyis `false` kezdőértékkel)
+*   Ciklusban iterálni addig, amíg van elem és nincs találat
+*   Feltétel teljesülésének esetén a találat tényét igazra állítani, és kilépni a ciklusból
+*   Találat tényének visszaadása
+
+vagy
+
+*   Ciklusban iterálni addig, amíg van elem és nincs találat
+*   Feltétel teljesülése (találat) esetén azonnal `true` értékkel visszatérni. Ezzel az iteráció is
+    befejeződik, nem kerül a listából több elem megvizsgálásra (de erre nincs is szükség, hiszen eldőlt,
+    hogy a feltétel igaz).
+*   Amennyiben a feltétel nem teljesülne a listában található utolsó elemnél sem, a metódus végén
+    `false` értékkel visszatérni.
+
+Az első megoldás esetében csak a metódus végén van a `return` utasítás, viszont itt szükséges egy átmeneti változó használata.
+A második megoldásnál a metódusban két `return` utasítás is található (a közepén és a végén is).
+
+### Gyakorlati megvalósítás
+
+```java
+public boolean containsGreaterThan(List<Integer> numbers, int min) {
+    boolean contains = false;
+    for (int i : numbers) {
+        if (i > min) {
+            contains = true;
+            break;
+        }
+    }
+    return contains;
+}
+```
+
+```java
+public boolean containsGreaterThan(List<Integer> numbers, int min) {
+    for (int i : numbers) {
+        if (i > min) {
+            return true;
+        }
+    }
+    return false;
+}
+```
+
+```java
+public boolean containsLowerThan(List<Integer> numbers, int max) {
+    boolean contains = false;
+    int i = 0;
+
+    while (i < numbers.size() && !contains) {
+        if (numbers.get(i) < max) {
+            contains = true;
+        }
+        i++;
+    }
+    return contains;
+}
+```
+
+Megjegyzés: az első két példa kód esetében autounboxing történik, amikor az `Integer`
+típusú számokat tartalmazó lista elemeinek bejárásához a for-each ciklus fejében `int`
+típusú változót definiálunk.
+
+## Ellenőrző kérdések
+
+* Mi a bemenete és a kimenete az eldöntés algoritmusának?
+* Mi legyen a kezdőértéke a majdani visszatérési értéket tároló változónak?
+* Meddig iteráljunk a ciklusban?
+
+## Gyakorlati feladatok
+
+Az `algorithmsdecision` csomagba dolgozz!
+
+### Gyakorlati feladat - Kis lélekszámú települések
+
+Hozz létre egy `towns.Town` osztályt és benne egy `containsFewerHabitants(List<Integer>, int)` metódust, amely kap egy
+egész számokat tartalmazó listát, amelyben települések lakossága van felsorolva. A metódusnak el kell döntenie,
+hogy található-e a listában a paraméterként megadott számnál kisebb lélekszámú település.
+
+### Gyakorlati feladat - "Nagy" szavak
+
+Hozz létre egy `words.Word` osztályt és benne egy `containsLongerWord(List<String>, String)` metódust, amely kap egy
+szavakat tartalmazó listát és egy újabb szót. A metódusnak el kell döntenie, hogy található-e a listában a paraméterként
+megadottnál hosszabb szó.
+
+### Gyakorlati feladat - Nagy összegű bankszámlák
+
+Hozz létre egy `bankaccounts.BankAccount` osztályt a szükséges attribútumokkal:
+
+* `nameOfOwner`, a számla tulajdonosának neve
+* `accountNumber`, a számlaszám
+* `balance`, egyenleg
+
+Legyen az osztálynak `withdraw` és `deposit` metódusa paraméterként kapott összeg levételére ill. betételére a számlára.
+
+Feladat egy `containsBalanceGreaterThan(List<BankAccount> accounts, int min)` metódus megírása a
+`BankAccountDecisionMaker` osztályban, ami eldönti, van-e olyan számla, amelynek az aktuális egyenlege
+meghaladja a paraméterként kapott alsó határt.
+
+<!-- [rating feedback=java-algorithmsdecision-bankszamlak] -->
+
+### Gyakorlati feladat - Prímszámok
+
+Készíts egy osztályt `Prime` néven! Ebben az osztályban legyen egy `isPrime(int number)` metódus ami a paraméterül
+kapott számról eldönti, hogy prím-e vagy sem! Prímeknek tekintjük azokat pozitív egész számokat melyek csak 1-gyel
+és önmagukkal oszthatók, tehát a 2, 3, 5, 7, 11, 13 stb.
+
+# Szűrés (filterezés)
+
+## Elmélet
+
+A **szűrés**, vagy más néven **filterezés** egy olyan művelet, amellyel egy listából tudunk elemeket
+valamilyen feltétel alapján kiválogatni.
+
+### Elméleti megvalósítás
+
+*  A szűrő metódus paraméterként kap egy n elemű listát.
+*  Létre kell hozni egy üres listát, amelybe majd beletesszük a feltételnek megfelelő értékeket.
+*  Ciklusban kell iterálni a bemeneti listán, közben a megadott feltétellel
+   megvizsgálni minden egyes elemet (`if` szerkezetben).
+*  Azon elemeket, amelyekre igaz a feltétel, bele kell tenni az erre a célra létrehozott üres listába.
+*  A metódus végén ezzel a (szűrt elemeket tartalmazó) listával kell visszatérni.
+
+### Gyakorlati megvalósítás
+
+```java
+public List<Trainer> filterByName(List<Trainer> trainers, String part) {
+    List<Trainer> filteredTrainers = new ArrayList<>();
+    for (Trainer trainer: trainers) {
+        if (trainer.getName().contains(part)) {
+            filteredTrainers.add(trainer);
+        }
+    }
+    return filteredTrainers;
+}
+```
+
+## Ellenőrző kérdések
+
+* Mi a bemenete és a kimenete a szűrő metódusnak?
+* Mivel kell kezdeni az algoritmust?
+* Iterálás közben mi a teendő?
+
+## Gyakorlati feladatok
+
+Az `algorithmsfilter` csomagba dolgozz!
+
+### Gyakorlati feladat - Előtag
+
+Írj egy `prefix.Prefix` osztályt, melyben a `getWordsStartWith(List<String> words, String prefix)` metódus feladata
+a kapott listából a megadott előtaggal kezdődőeket kiválogatni és egy listában visszaadni.
+
+### Gyakorlati feladat - Állatkert
+
+Hozz létre egy `zoo.Animal` osztályt, amelynek két attribútuma van: az állat neve (`name`) és lábainak száma (`numberOfLegs`)!
+Készíts hozzá természetesen konstruktort és gettereket is!
+Majd hozz létre egy `zoo.Zoo` osztályt, amelynek van egy állatokat tartalmazó lista attribútuma! Ez a lista úgy kap értéket,
+hogy az osztály példányosításakor a konstruktornak kell megadni paraméterként. Legyen hozzá getter és egy `addAnimal(Animal)`
+metódus! Továbbá legyen az osztálynak egy olyan metódusa (`getAnimalsWithNumberOfLegsGiven(int numberOfLegs)`), amely
+kikeresi és egy másik listában összegyűjtve visszaadja az állatkert azon állatait, amelyeknek annyi lábuk van, mint
+a paraméterül kapott szám!
+
+### Gyakorlati feladat - Jó filmek
+
+Készíts egy `movies.Movie` osztályt, amelynek három attribútuma:
+
+* `String title`
+* `Category category` (ez egy enum, néhány általad megadott filmkategóriával, pl. akciófilm, thriller, romantikus, stb.)
+* `int rating` (minden filmnek van egy 1 és 5 közötti értékelése)
+
+Majd készíts egy `VideoTheque` osztályt, amelynek van egy filmeket tartalmazó lista attribútuma, amelyet példányosíts
+is le! Legyen hozzá getter és egy másik metódus, amellyel új filmeket lehet a listához adni! Ezenkívül legyen az
+osztálynak egy metódusa (a nevét megtudhatod a megfelelő tesztesetből), amely segíteni tudja a videotékába látogató emberek
+választását úgy, hogy egy listába összegyűjtve visszaadja a paraméterként megadott kategóriájú, 3-asnál jobb értékelést
+kapott filmeket!
+
+# Transzformáció
+
+## Elmélet
+
+A **transzformáció** az a művelet, amelynek során egy bizonyos típusú objektumból egy másik típusú
+objektumot hozunk létre. Klasszikusan listákra szoktuk alkalmazni.
+Transzformációnak számít, ha például egy objektumból csak egy attribútum értékét akarjuk kivenni, vagy más
+objektumot hozunk létre, bizonyos értékeket átmásolva az eredetiből.
+
+### Elméleti megvalósítás
+
+*  A transzformáló metódus paraméterként kap egy n elemű listát. A metódus visszatérési értéke
+   egy másmilyen típusú objektumokat tartalmazó lista kell, hogy legyen. Ez egyben megadja azt is,
+   hogy mi alapján kell majd transzformálni.
+*  Létre kell hozni egy üres listát, amelybe majd beletesszük a transzformált objektumokat.
+*  Ciklusban kell iterálni a bemeneti listán, közben a transzformált elemeket bele kell tenni az
+   erre a célra létrehozott üres listába.
+*  Van lehetőség ehhez még egy feltételt is megadni, hogy az eredményként visszaadandó listába csak
+   ennek a feltételnek megfelelő (transzformált) objektumok kerüljenek bele
+*  A metódus végén ezzel a (transzformált objektumokat tartalmazó) listával kell visszatérni.
+
+### Gyakorlati megvalósítás
+
+```java
+public List<String> toNames(List<Trainer> trainers) {
+    List<String> names = new ArrayList<>();
+    for (Trainer trainer: trainers) {
+        names.add(trainer.getName());
+    }
+    return names;
+}
+```
+
+```java
+public List<String> toNamesYearOfBirthBefore(List<Trainer> trainers, int year) {
+    List<String> names = new ArrayList<>();
+    for (Trainer trainer: trainers) {
+        if (trainer.getYearOfBirth() < year) {
+            names.add(trainer.getName());
+        }
+    }
+    return names;
+}
+```
+
+## Ellenőrző kérdések
+
+* Mi a bemenete és a kimenete a transzformáló metódusnak?
+* Mivel kell kezdeni az algoritmust?
+* Iterálás közben mi a teendő?
+
+## Gyakorlati feladatok
+
+Az `algorithmstransformation` csomagba dolgozz!
+
+### Gyakorlati feladat - Első két betű
+
+Írj egy `letters.TwoLetters` osztályt, amelyben a `getFirstTwoLetters(List<String>)` metódus feladata visszaadni
+egy olyan listát, amelyben az eredeti lista által tartalmazott szavak első két betűjéből álló Stringek szerepelnek
+(ugyanolyan sorrendben, ahogyan az eredeti szavak az eredeti listában)!
+
+### Gyakorlati feladat - Családtagok
+
+Legyen egy `family.FamilyMember` nevű osztály név és életkor attribútumokkal, konstruktorral és getterekkel! Majd legyen egy
+`Family` osztály, amelynek van egy családtagokat tartalmazó listája! Ezt a konstruktorban példányosítsd le! Legyen hozzá
+getter és `addFamilyMember(FamilyMember)` metódus is! Majd készíts egy olyan metódust (a nevét megtalálod a tesztben),
+amelynek megadhatunk egy keresztnevet, és visszaad egy listát azon családtagok életkori adatairól, akiknek ez a(z egyik)
+keresztnevük!
+
+### Gyakorlati feladat - Diákok
+
+A `students` csomagban legyen egy `Person` osztály név, életkor és cím attribútumokkal, konstruktorral és getterekkel!
+Továbbá legyen egy hasonló `Student` osztály, de itt csak név és cím attribútumok legyenek! Majd legyen egy `PrimarySchool` osztály,
+amelynek van egy `List<Person> people` listája, amelyben az iskola összes diákját, tanárját és technikai dolgozóit tartja nyilván! A lista
+konstruktor paraméteren keresztül kapjon értéket, és legyen hozzá getter és `addPerson(Person)` metódus! Ebben az
+osztályban írj meg egy `List<Student> getStudents()` metódust, amely az iskola listájából életkoruk alapján (6-14 év)
+kiválogatja és egy másik listában visszaadja az iskola tanulóit!
+
+# Rekurzió
+
+## Elmélet
+
+Az önmagát hívó metódusokat **rekurziónak** nevezzük. A metódus hívhatja magát közvetlenül, vagy
+akár más metódusokon keresztül is. Minden rekurzió ciklussá formálható. Vigyázzunk, mert könnyen
+implementálhatunk **végtelen rekurziót**.
+
+Rekurziót főleg akkor alkalmazunk, mikor egy feladat visszavezethető egy hasonló, egyszerűbb
+esetre. Létezik legegyszerűbb eset, melyben a megoldás már magától értetődő. Létezik egy olyan
+egyszerűsítési folyamat, melyet alkalmazva véges sok lépésben eljutunk a legegyszerűbb esethez.
+Minden lépésben feltételezzük, hogy a következő egyszerűbb esetnek már van megoldása.
+
+### Rekurzió részei
+
+A rekurzió tartalmaz egy állapotot, mely elérhet egy küszöböt; egy utasítást, mely az állapotot
+a küszöb felé viszi; illetve egy leállító feltételt, amely azt vizsgálja, hogy az állapot elérte-e a küszöböt.
+
+Leggyakoribb példa a rekurzióra a faktoriális számítás:
+
+A matematikában egy n nemnegatív egész szám faktoriálisának az n-nél kisebb vagy
+egyenlő pozitív egész számok szorzatát nevezzük. n! = n * (n-1) * ... * 2 * 1
+
+```java
+public long getFactorial(int n) {
+    if(n > 1) {
+        long solution = getFactorial(n - 1);
+        return n * solution;
+    } else {
+        return 1;
+    }
+}
+```
+
+## Ellenőrző kérdések
+
+* Mit jelent a rekurzió?
+* Hogyan biztosítható, hogy véges lépésben befejeződjön a rekurzív algoritmus?
+
+## Gyakorlati feladatok
+
+A `recursion` csomagba dolgozz!
+
+### Gyakorlati feladat - Tömb elemeinek összege
+
+A `Numbers` osztályban legyen egy `getSum(int[] numbers)` metódus, mely összeadja a paraméterül kapott, egész számokat tartalmazó tömb
+elemeit! Írd meg a feladatot rekurzióval! (A megoldás menete: Egy 10 elemű tömb összegét számoljuk úgy ki,
+hogy az első elemet hozzáadjuk a 9 elemű résztömb elemeinek összegéhez. A metódus önmagát hívja újra, ekkor már a 9 elemű
+tömbbel, ekkor már az első elemet a 8 elemű résztömb elemeinek összegéhez kell hozzáadni és így tovább. Amint a
+tömb 1 eleművé "fogy", az elemeinek az összege egyértelműen adódik.)
+
+### Gyakorlati feladat - Palindroma
+
+A `Palindrome` osztályban írj egy `isPalindrome(String word)` metódust, amely eldönti egy szóról, hogy
+palindrom szó-e! Írd meg a feladatot rekurzióval! (A megoldás menete: Meg kell vizsgálni, hogy a szó első és
+utolsó betűje megegyezik-e, majd utána az ezen betűk közötti, "középső" szóra kell újra megvizsgálni ugyanazt.
+Ha már csak nulla vagy egy betű marad a szóból, akkor az már logikailag egyértelmű, hogy palindrom szó.)
+
+### Gyakorlati feladat - Magánhangzók
+
+A `Vowels` osztályban írj egy `getNumberOfVowels(String word)` metódust, amely visszaadja, hány magánhangzó van a
+paraméterként átadott szóban! Írd meg a feladatot rekurzióval! (A megoldás menete: Meg kell vizsgálni, hogy a szó első
+betűje magánhangzó-e, és ez esetben 1-et visszaadni, ellenkező esetben 0-t. Majd meg kell vizsgálni ugyanezt arra a szóra,
+amelyet az eredeti szó első betűjének törlésével kapunk, tehát újra kell hívni a metódust az egy betűvel rövidebb szóval.
+
