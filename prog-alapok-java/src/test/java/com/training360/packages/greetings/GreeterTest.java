@@ -3,6 +3,7 @@ package com.training360.packages.greetings;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 class GreeterTest {
 
@@ -16,5 +17,11 @@ class GreeterTest {
 
         // Then
         assertEquals("Hello World!", hello);
+    }
+
+    @Test
+    void sayHello3() {
+        Greeter greeter = new Greeter();
+        assertNotNull(greeter);
     }
 }

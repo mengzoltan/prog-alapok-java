@@ -23,6 +23,16 @@ public class HelloWorld {
 //        printArray(args);
 
         helloWorld2.printArray(args);
+
+        String exampleString = "Nagy Bela;13;33";
+        String[] split = exampleString.split(";");
+        User user = new User();
+        user.setName(split[0]);
+        user.setAge(Integer.parseInt(split[1]));
+        user.setAvg(Integer.parseInt(split[2]));
+
+        System.out.println(user);
+
     }
 
     public String getName() {
