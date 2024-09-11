@@ -9,7 +9,9 @@ import java.util.List;
 public class Main {
 
     public static void main(String[] args) {
+
         Main main = new Main();
+
         String path = "src/main/resources/shoppinglist.txt";
         List<String> shList = null;
 
